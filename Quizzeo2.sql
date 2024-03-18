@@ -1,61 +1,58 @@
-Drop Database if exists Quizzeo2;
-CREATE Database if not exists Quizzeo2;
-use Quizzeo2;
-CREATE TABLE Rôles(
+DROP DATABASE IF EXISTS Quizzeo2;
+CREATE DATABASE IF NOT EXISTS Quizzeo2;
+USE Quizzeo2;
+
+CREATE TABLE Roles (
    id_role INT PRIMARY KEY AUTO_INCREMENT,
-   admin VARCHAR(50),
-   validateur VARCHAR(50),
-   quizz_admin VARCHAR(50),
-   quizzer VARCHAR(50),
-   utilisateur VARCHAR(50)
+   nom_role VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Users(
+CREATE TABLE Users (
    id_user INT PRIMARY KEY AUTO_INCREMENT,
    pseudo VARCHAR(50),
    email VARCHAR(50),
    password VARCHAR(50),
-   statut_compte enum('active','desactive') NOT NULL,
+   statut_compte ENUM('active', 'desactive') NOT NULL,
    id_role INT NOT NULL,
-   FOREIGN KEY(id_role) REFERENCES Rôles(id_role)
+   FOREIGN KEY (id_role) REFERENCES Roles(id_role)
 );
 
-CREATE TABLE Quizzes(
+CREATE TABLE Quizzes (
    id_quizz INT PRIMARY KEY AUTO_INCREMENT,
    titre VARCHAR(50),
    date_creation DATE,
    nbre_questions INT,
-   type enum('QCM','Sondage') NOT NULL,
+   type ENUM('QCM', 'Sondage') NOT NULL,
    Description VARCHAR(120),
-   statut_quizz enum('creation','lance','termine') NOT NULL,
-   visi_res('public','prive') NOT NULL,
+   statut_quizz ENUM('creation', 'lance', 'termine') NOT NULL,
+   visi_res ENUM('public', 'prive') NOT NULL,
    id_user INT NOT NULL,
-   FOREIGN KEY(id_user) REFERENCES Users(id_user)
+   FOREIGN KEY (id_user) REFERENCES Users(id_user)
 );
 
-CREATE TABLE questions(
+CREATE TABLE Questions (
    id_question INT PRIMARY KEY AUTO_INCREMENT,
    text VARCHAR(150),
    intitule VARCHAR(50),
    id_quizz INT NOT NULL,
-   FOREIGN KEY(id_quizz) REFERENCES Quizzes(id_quizz)
+   FOREIGN KEY (id_quizz) REFERENCES Quizzes(id_quizz)
 );
 
-CREATE TABLE reponses(
+CREATE TABLE Reponses (
    id_reponse INT PRIMARY KEY AUTO_INCREMENT,
    text_reponse VARCHAR(50),
-   statut_reponse enum('correct','incorrect') NOT NULL,
+   statut_reponse ENUM('correct', 'incorrect') NOT NULL,
    id_question INT NOT NULL,
-   FOREIGN KEY(id_question) REFERENCES questions(id_question)
+   FOREIGN KEY (id_question) REFERENCES Questions(id_question)
 );
 
-CREATE TABLE reponse_user(
+CREATE TABLE Reponse_user (
    id_repuser INT PRIMARY KEY AUTO_INCREMENT,
    id_user INT,
    id_question INT,
    id_reponse INT,
-   statut_rep enum('correct','incorrect') INT NOT NULL,
-   FOREIGN KEY(id_user) REFERENCES Users(id_user),
-   FOREIGN KEY(id_question) REFERENCES questions(id_question),
-   FOREIGN KEY(id_reponse) REFERENCES reponses(id_reponse)
-)
+   statut_rep ENUM('correct', 'incorrect') NOT NULL,
+   FOREIGN KEY (id_user) REFERENCES Users(id_user),
+   FOREIGN KEY (id_question) REFERENCES Questions(id_question),
+   FOREIGN KEY (id_reponse) REFERENCES Reponses(id_reponse)
+);
