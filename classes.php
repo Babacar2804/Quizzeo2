@@ -63,6 +63,11 @@ class AdminSite extends Users {
         $statement = $this->db->executeQuery($query, $params);
         return $statement->execute();
     }
+    public function getUserByEmail($email) {
+        $query = "SELECT * FROM users WHERE email = :email";
+        $statement = $this->db->executeQuery($query, array(':email' => $email));
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 }
 
 class ValCompte extends Users {
