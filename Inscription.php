@@ -3,7 +3,7 @@ require 'classes.php';
 $db = new BDD();
 $adminSite = new AdminSite($db);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         $pseudo = $_POST["pseudo"];
         $email = $_POST["email"];
         $password = $_POST["password"];
@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required><br><br>
 
-            <input type="submit" value="S inscrire">
+            <input type="submit" name="submit" value="S'inscrire">
         </form>
     </body>
 </html>
