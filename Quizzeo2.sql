@@ -12,7 +12,7 @@ CREATE TABLE Users (
    pseudo VARCHAR(50),
    email VARCHAR(50),
    password VARCHAR(50),
-   statut_compte ENUM('active', 'desactive') NOT NULL,
+   statut_compte boolean NOT NULL,
    id_role INT NOT NULL,
    FOREIGN KEY (id_role) REFERENCES Roles(id_role)
 );
@@ -71,7 +71,7 @@ INSERT INTO roles (id_role, nom_role) VALUES
 
 
 INSERT INTO users (id_user, pseudo, email, password, statut_compte, id_role) VALUES
-(1, 'admin', 'admin@example.com', 'admin', 'active', 1),
-(2, 'validateur', 'validateur@example.com', 'validateur', 'active', 2),
-(3, 'adminquiz', 'adminquiz@example.com', 'adminquiz', 'active', 3),
-(4, 'quizzer', 'quizzer@example.com', 'quizzer', 'active', 4);
+(1, 'admin', 'admin@example.com', 'admin', true, 1),
+(2, 'validateur', 'validateur@example.com', 'validateur', true, 2),
+(3, 'adminquiz', 'adminquiz@example.com', 'adminquiz', true, 3),
+(4, 'quizzer', 'quizzer@example.com', 'quizzer', true, 4);

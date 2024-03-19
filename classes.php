@@ -37,7 +37,7 @@ class Users {
     
     public function AddUsers($pseudo, $email, $password,$role) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO users (pseudo, email, password, statut_compte,id_role) VALUES (:pseudo, :email, :password, 'active',:id_role)";
+        $query = "INSERT INTO users (pseudo, email, password, statut_compte,id_role) VALUES (:pseudo, :email, :password, false,:id_role)";
         $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword,':id_role'=>$role);
         $statement = $this->db->executeQuery($query, $params);
         return $statement->execute();
@@ -58,7 +58,7 @@ class AdminSite extends Users {
     }
 
     public function UsersLogged() {
-        $query = "SELECT * FROM users WHERE statut_compte = 'active'";
+        $query = "SELECT * FROM users WHERE statut_compte = true";
         $statement = $this->db->executeQuery($query);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
