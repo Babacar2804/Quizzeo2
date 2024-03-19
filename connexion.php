@@ -7,13 +7,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
         $username = $_POST["pseudo"];
         $password = $_POST["password"];
-        $query = "SELECT id_user, pseudo, password, id_role FROM Users WHERE pseudo = :pseudo AND password = :password";
+        $passwd=password_hash($password,PASSWORD_DEFAULT);
+        $query = "SELECT id_user, pseudo, password, id_role FROM Users WHERE pseudo = :pseudo AND password == $passwd";
         $statement = $db->executeQuery($query, array(':pseudo' => $username, ':password' => $password));
         $user = $statement->fetch(PDO::FETCH_ASSOC);
-        $passwd=password_hash($password,PASSWORD_DEFAULT);
-        if($passwd==$password){
-            
-        }
+        
+        
         if ($user) {
             switch ($user['id_role']) {
                 case 1: 
