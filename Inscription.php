@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $pseudo = $_POST["pseudo"];
         $email = $_POST["email"];
         $password = $_POST["password"];
-        $role= $_POST["role"];
+        $role= 5;
             
         if (empty($pseudo) || empty($email) || empty($password)|| empty($role)) {
             $error = "Tous les champs sont requis.";
@@ -38,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required><br><br>
-            <input type="hidden" id="role" value="5" required><br><br>
 
             <input type="submit" value="Se connecter">
         </form>
