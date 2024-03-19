@@ -58,7 +58,7 @@ class AdminSite extends Users {
 
     public function AddUsers($pseudo, $email, $password) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO users (pseudo, email, password, statut_compte) VALUES (:pseudo, :email, :password, 'active')";
+        $query = "INSERT INTO users (pseudo, email, password, statut_compte,id_role) VALUES (:pseudo, :email, :password, 'active',5)";
         $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword);
         $statement = $this->db->executeQuery($query, $params);
         return $statement->execute();
