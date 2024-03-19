@@ -8,13 +8,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
         $password = $_POST["password"];
             
-        // $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        // $query = "INSERT INTO users (pseudo, email, password, statut_compte) VALUES (:pseudo, :email, :password, 'active')";
-        // $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword);
-        // $statement = $db->executeQuery($query, $params);
-        // return $statement->execute();
-
-        $user = $adminSite->addUsers($pseudo, $email, $password);
+        if (empty($pseudo) || empty($email) || empty($password)) {
+            $error = "Tous les champs sont requis.";
+        } else {
+            $result = $adminSite->addUsers($pseudo, $email, $password);
+            if ($result) {
+                echo "Utilisateur ajouté avec succès.";
+            } else {
+                echo "Une erreur s'est produite lors de l'ajout de l'utilisateur.";
+            }
+    }
 }
 ?>
 <!DOCTYPE html>
