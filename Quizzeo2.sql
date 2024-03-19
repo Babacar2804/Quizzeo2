@@ -56,3 +56,22 @@ CREATE TABLE Reponse_user (
    FOREIGN KEY (id_question) REFERENCES Questions(id_question),
    FOREIGN KEY (id_reponse) REFERENCES Reponses(id_reponse)
 );
+CREATE TABLE API(
+id_api INT PRIMARY KEY AUTO_INCREMENT,
+id_user INT,
+API_KEY VARCHAR(100),
+FOREIGN KEY (id_user) REFERENCES Users(id_user)
+);
+INSERT INTO roles (id_role, nom_role) VALUES
+(1, 'Admin'),
+(2, 'Validateur'),
+(3, 'Quizz_admin'),
+(4, 'Quizzer'),
+(5, 'Utilisateur');
+
+
+INSERT INTO users (id_user, pseudo, email, password, statut_compte, id_role) VALUES
+(1, 'admin', 'admin@example.com', 'admin', 'active', 1),
+(2, 'validateur', 'validateur@example.com', 'validateur', 'active', 2),
+(3, 'adminquiz', 'adminquiz@example.com', 'adminquiz', 'active', 3),
+(4, 'quizzer', 'quizzer@example.com', 'quizzer', 'active', 4);
