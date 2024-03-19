@@ -35,13 +35,7 @@ class Users {
         $this->db = $db;
     }
     
-    public function AddUsers($pseudo, $email, $password,$role) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO users (pseudo, email, password, statut_compte,id_role) VALUES (:pseudo, :email, :password, false,:id_role)";
-        $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword,':id_role'=>$role);
-        $statement = $this->db->executeQuery($query, $params);
-        return $statement->execute();
-    }
+    
 
     public function getUserByEmail($email) {
         $query = "SELECT * FROM users WHERE email = :email";
@@ -69,13 +63,7 @@ class AdminSite extends Users {
         $statement = $this->db->executeQuery($query);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    public function AddUsers($pseudo, $email, $password,$role) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $query = "INSERT INTO users (pseudo, email, password, statut_compte,id_role) VALUES (:pseudo, :email, :password, 'active',:id_role)";
-        $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword,':id_role'=>$role);
-        $statement = $this->db->executeQuery($query, $params);
-        return $statement->fetch(PDO::FETCH_ASSOC);
-    }
+   
 }
 
 class ValCompte extends Users {
