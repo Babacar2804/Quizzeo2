@@ -1,7 +1,7 @@
 <?php 
 require 'classes.php';
 $db = new BDD();
-$adminSite = new AdminSite($db);
+$users = new Users($db);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
@@ -14,11 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     if (empty($pseudo) || empty($email) || empty($password)) {
         $error = "Tous les champs sont requis.";
     } else {
-        $existingUser = $adminSite->getUserByEmail($email);
+        $existingUser = $users->getUserByEmail($email);
         if ($existingUser) {
             $error = "Cet email est déjà utilisé. Veuillez choisir un autre.";
         } else {
-            $result = $adminSite->addUsers($pseudo, $email, $password, $role);
+            $result = $users->addUsers($pseudo, $email, $password, $role);
             if ($result) {
                 echo "Utilisateur ajouté avec succès.";
             } else {
