@@ -9,10 +9,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST["password"];
         $role= $_POST["role"];
             
-        if (empty($pseudo) || empty($email) || empty($password)) {
+        if (empty($pseudo) || empty($email) || empty($password)|| empty($role)) {
             $error = "Tous les champs sont requis.";
         } else {
-            $result = $adminSite->addUsers($pseudo, $email, $password);
+            $result = $adminSite->addUsers($pseudo, $email, $password,$role);
             if ($result) {
                 echo "Utilisateur ajouté avec succès.";
             } else {
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required><br><br>
-            <input type="hidden" id="role" name="role" required><br><br>
+            <input type="hidden" id="role" value=5 required><br><br>
 
             <input type="submit" value="Se connecter">
         </form>
