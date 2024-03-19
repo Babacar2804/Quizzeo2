@@ -4,11 +4,11 @@ require 'classes.php';
 $db = new BDD();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["username"]) && isset($_POST["password"])) {
-        $username = $_POST["username"];
+    if (isset($_POST["pseudo"]) && isset($_POST["password"])) {
+        $username = $_POST["pseudo"];
         $password = $_POST["password"];
-        $query = "SELECT id_user, pseudo, password, id_role FROM Users WHERE pseudo = :username AND password = :password";
-        $statement = $db->executeQuery($query, array(':username' => $username, ':password' => $password));
+        $query = "SELECT id_user, pseudo, password, id_role FROM Users WHERE pseudo = :pseudo AND password = :password";
+        $statement = $db->executeQuery($query, array(':pseudo' => $username, ':password' => $password));
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         if ($user) {
             switch ($user['id_role']) {
@@ -51,8 +51,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <h1>Connexion</h1>
     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="username" required><br><br>
+        <label for="pseudo">Pseudo :</label>
+        <input type="text" id="pseudo" name="pseudo" required><br><br>
         <label for="password">Mot de passe :</label>
         <input type="password" id="password" name="password" required><br><br>
         <input type="submit" value="Se connecter">
