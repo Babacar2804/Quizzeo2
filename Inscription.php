@@ -4,15 +4,13 @@ require 'classes.php';
 $db = new BDD();
 $users = new Users($db);
 
-
-
 if(isset($_POST['captcha'])){
     if($_POST['captcha'] == $_SESSION['captcha']){
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
             $pseudo = $_POST["pseudo"];
             $email = $_POST["email"];
-            $password = $_POST["password"];
+            $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $role= 5;
     
                 
@@ -24,9 +22,8 @@ if(isset($_POST['captcha'])){
                 $error = "Cet email est déjà utilisé. Veuillez choisir un autre.";
                 echo $error;
             } else {
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                 $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, 'active', :id_role)";
-                $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword, ':id_role' => $role);
+                $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $password, ':id_role' => $role);
                 $statement = $db->executeQuery($query, $params);
                 
                 if ($statement) {

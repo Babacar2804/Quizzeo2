@@ -11,7 +11,7 @@ CREATE TABLE Users (
    id_user INT PRIMARY KEY AUTO_INCREMENT,
    pseudo VARCHAR(50),
    email VARCHAR(50),
-   password VARCHAR(50),
+   password VARCHAR(255),
    statut_compte boolean NOT NULL,
    id_role INT NOT NULL,
    FOREIGN KEY (id_role) REFERENCES Roles(id_role)
