@@ -18,8 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         if ($existingUser) {
             $error = "Cet email est déjà utilisé. Veuillez choisir un autre.";
         } else {
-            $result = $users->addUsers($pseudo, $email, $password, $role);
-            if ($result) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, 'active', :id_role)";
+            $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashedPassword, ':id_role' => $role);
+            $statement = $db->executeQuery($query, $params);
+            
+            if ($statement) {
                 echo "Utilisateur ajouté avec succès.";
             } else {
                 echo "Une erreur s'est produite lors de l'ajout de l'utilisateur.";
@@ -28,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
