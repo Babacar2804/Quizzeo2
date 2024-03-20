@@ -75,6 +75,6 @@ class Quizzer extends SimpleUsers {
 }
 
 class SimpleUsers extends Users {
+
 }
 
-?>
