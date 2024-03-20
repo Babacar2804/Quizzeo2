@@ -42,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
         exit(); 
     } else {
         echo "Identifiants invalides. Veuillez réessayer.";
-        var_dump($user); 
-        var_dump(password_verify($password, $user['password'])); 
+        // var_dump($user); 
+        // var_dump(password_verify($password, $user['password'])); 
     }
 }
 ?>
