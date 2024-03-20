@@ -67,6 +67,9 @@ class AdminSite extends Users {
 }
 
 class ValCompte extends Users {
+    public function Validay(){
+        
+    }
 }
 class AdminQuiz extends Quizzer {
 }
@@ -75,6 +78,7 @@ class Quizzer extends SimpleUsers {
 }
 
 class SimpleUsers extends Users {
+
 }
 
 ?>
