@@ -47,21 +47,22 @@ if(isset($_POST['captcha'])){
     <title>Inscription</title>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <h1>Inscription</h1>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post" id="registrationForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
         <label for="pseudo">Pseudo:</label>
-        <input type="text" id="pseudo" name="pseudo" required><br><br>
+        <input type="text" id="pseudo" name="pseudo" required></input><br><br>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
+        <input type="email" id="email" name="email" required></input><br><br>
 
         <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="password" required><br><br>
+        <input type="password" id="password" name="password" required></input><br><br>
         <img src="captcha.php"/>
-        <input type="text"  name="captcha"/>
-
-        <input type="submit" name="submit" value="S'inscrire">
-    </form>
+        <input type="text"  name="captcha"></input>
+        <input type="submit" id ="submit" name="submit" value="S'inscrire"></input>
+    </form>    
 </body>
 
 </html>
