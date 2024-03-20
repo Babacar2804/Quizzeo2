@@ -27,12 +27,16 @@ if(isset($_POST['captcha'])){
                 $statement = $db->executeQuery($query, $params);
                 
                 if ($statement) {
-                    echo "Utilisateur ajouté avec succès.";
+                    echo "Utilisateur ajouté avec succès. ";
                 } 
             }
         }
     }    
         echo "Captcha valide";
+        echo "Demande de validation de compte envoyée";
+    
+        // envoi demande validation de compte
+    
     }else{
         echo "Captcha invalide";
         echo "Une erreur s'est produite lors de l'ajout de l'utilisateur.";
