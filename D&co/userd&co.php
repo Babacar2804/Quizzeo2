@@ -18,13 +18,12 @@
             </div>
             <br><br>
             <div class="lien_quizz">
-                <p>Collez votre lien pour rejoindre un quizz ici:</p>
-                <br><br>
+                <h3>Rejoindre un Quizz</h3> <br>
                 <input class="textarea" type="textarea"placeholder="collez le lien ici"> </input>
-            </div>
+            </div><br>
             <div class="api">
-             <!-- <button type="button" id="boutapi" name="boutapi"><script></script> récupérer mon api</button>
-             section pour rejoindre un quizz (coller un lien)  -->
+                <h3> Recuperer ma clé API</h3>
+<button type="button" id="boutapi" name="boutapi"><script></script> récupérer mon api</button>
             </div>
         </div>
     </div>
