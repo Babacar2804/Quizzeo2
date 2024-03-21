@@ -16,11 +16,10 @@ app.use((req, res, next) => {
 
 // Route pour créer une clé API
 app.post('/createApiKey', (req, res) => {
-    const { pseudo, email, password } = req.body; // Récupérer les données du formulaire
     const apiKey = uniqid(); // Générer une clé API unique
 
     // Enregistrer la clé API dans la base de données
-    connection.query('INSERT INTO users (pseudo, email, password, api_key) VALUES (?, ?, ?, ?)', [pseudo, email, password, apiKey], (error, results, fields) => {
+    connection.query('INSERT INTO users (api_key) VALUES (?)', [apiKey],  (error, results, fields) => {
         if (error) {
             console.error('Erreur lors de la création de la clé API :', error);
             res.status(500).json({ error: 'Erreur lors de la création de la clé API' });
