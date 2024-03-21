@@ -3,10 +3,11 @@ session_start();
 require 'classes.php';
 $db = new BDD();
 var_dump($_SESSION);
+$session_user_id = $_SESSION['user_id'];
 // Vérifie si l'utilisateur est connecté
-if(isset($_SESSION['user_id'])) {
+if(isset($session_user_id)) {
     // Récupération de l'ID utilisateur de la session
-    $session_user_id = $_SESSION['user_id'];
+    
     var_dump($session_user_id);
    // Requête pour récupérer l'ID utilisateur de la base de données correspondant à celui de la session
     $query = "SELECT id_user FROM Users WHERE id_user = :session_user_id";
@@ -43,8 +44,9 @@ if(isset($_SESSION['user_id'])) {
 </head>
 
 <body>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <button type="button" id="generateApiKey" name="generateApiKey">Récupérer mon API</button>
+    <button type="button" id="generateApiKey" name="generateApiKey" data-session-id="<?php echo $session_user_id; ?>">Récupérer mon API</button>
     <!-- section pour rejoindre un quizz (coller un lien)  -->
     <script src='api.js'></script>
 </body>
