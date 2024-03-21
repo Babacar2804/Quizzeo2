@@ -18,10 +18,9 @@
                 <form method="post" id="registrationForm" action="#">
                     <input type="text" id="pseudo" name="pseudo" placeholder="pseudo" required></input><br><br>
                     <input type="email" id="email" name="email" placeholder="email" required></input><br><br>
-                    <input type="password" id="password" name="password" placeholder="mot de passe"
-                        required></input><br><br>
-                    <img src="\Quizzeo2\captcha.php" />
-                    <input type="text" name="captcha"></input>
+                    <input type="password" id="password" name="password" placeholder="mot de passe"required></input><br><br>
+                    <img src="\Quizzeo2\captcha.php"/><br><br>
+                    <input type="text" name="captcha" placeholder="rentrez le captcha"></input><br><br>
                     <input type="submit" id="submit" name="submit" value="S'inscrire"></input>
                 </form>
             </div>
