@@ -10,12 +10,9 @@ class BDD {
     public function __construct() {
         try {
             $this->connection = new PDO("mysql:host=$this->host;dbname=$this->BDD", $this->username, $this->password);
-            // Configurer PDO pour afficher les erreurs
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            // Définir le jeu de caractères à utf8mb4
             $this->connection->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES utf8mb4");
         } catch (PDOException $e) {
-            // En cas d'erreur de connexion, afficher le message d'erreur
             echo "Erreur de connexion: " . $e->getMessage();
             die();
         }
@@ -52,19 +49,34 @@ class AdminSite extends Users {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function UsersLogged() {
-        $query = "SELECT * FROM users WHERE statut_compte = true";
-        $statement = $this->db->executeQuery($query);
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+public function UsersLogged() {
+    if (isset($_SESSION['logged_users'])) {
+        return $_SESSION['logged_users'];
+    } else {
+        return [];
     }
-
+}
+    
     public function Quizzes() {
         $query = "SELECT * FROM quizzes";
         $statement = $this->db->executeQuery($query);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-   
-}
+    
+        public function updateUserStatus($user_id, $status) {
+            // Vérifier si le statut est "active" ou "inactive"
+            $statut_compte = ($status === "active") ? 1 : 0;
+            $query = "UPDATE Users SET statut_compte = :statut_compte WHERE id_user = :user_id";
+            $params = array(':statut_compte' => $statut_compte, ':user_id' => $user_id);
+            $statement = $this->db->executeQuery($query, $params);
+            if ($statement) {
+                echo "Statut du compte utilisateur mis à jour avec succès.";
+            } else {
+                echo "Une erreur s'est produite lors de la mise à jour du statut du compte utilisateur.";
+            }
+        }
+    }
+    
 
 class ValCompte extends Users {
 }
@@ -75,6 +87,6 @@ class Quizzer extends SimpleUsers {
 }
 
 class SimpleUsers extends Users {
-
 }
 
+?>
