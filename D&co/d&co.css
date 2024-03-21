@@ -1,0 +1,78 @@
+/* Style des pages */
+body{
+    background-color: #4e4e4e;
+}
+::placeholder{
+    text-align: center;
+    opacity: 50%;
+    color:#b98c36;
+}
+.textarea{
+    background-color: #555;
+}
+.principal{
+ display:flex;
+ grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+ gap: 10px;
+ box-sizing:border-box;
+
+}
+.container{
+    display: grid;
+    height: auto;
+}
+.presentation{
+    margin: auto;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    text-align:justify;
+    border: #555 1px solid;
+    border-radius: 5px;
+}
+.lien_quizz{
+    margin: auto;
+    display:flex;
+    justify-content: center;
+    text-align:center;
+    border: #555 1px solid;
+    border-radius: 5px;
+}
+
+/* Barre de Navigation */
+.barnav {
+    background-color: #333;
+    border: #555 1px solid;
+    border-radius: 5px;
+}
+
+/* Style de la liste non ordonnée */
+.barnav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Style des éléments de la liste */
+.barnav ul li {
+    display: inline;
+    margin: auto;
+}
+
+/* Style des liens */
+.barnav ul li a {
+    display: inline-flex;
+    margin:left 5px top 1px;
+    padding: 5px;
+    color: #b98c36;
+    text-decoration: none;
+}
+/* Changement de couleur au survol */
+.barnav ul li a:hover {
+    background-color: #555;
+    transition: all;
+    transition-duration: 2s;
+}
+.barnav ul li img{
+    margin-left: auto;
+}
