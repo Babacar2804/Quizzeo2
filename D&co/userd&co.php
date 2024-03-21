@@ -17,6 +17,7 @@
                 <h1>Bienvenue sur Quizzeo</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eveniet animi hic soluta eligendi itaque dicta deleniti? Aliquam, vero repellat. Accusamus necessitatibus est dolorum facere, placeat tenetur hic saepe. Natus! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea dolorum et ipsa officiis, esse excepturi quaerat corporis labore est voluptatibus tenetur neque, sit aut maxime inventore ipsam! Error, animi hic.</p>
             </div>
+            <br><br>
             <div class="lien_quizz">
                 <p>Collez votre lien pour rejoindre un quizz ici:</p>
                 <br><br>

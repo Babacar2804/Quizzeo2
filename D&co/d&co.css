@@ -29,6 +29,7 @@ body{
     gap: 8px;
     text-align:justify;
     border: #555 1px solid;
+    border-radius: 5px;
 }
 .lien_quizz{
     margin: auto;
@@ -36,12 +37,14 @@ body{
     justify-content: center;
     text-align:center;
     border: #555 1px solid;
+    border-radius: 5px;
 }
 
 /* Barre de Navigation */
 .barnav {
     background-color: #333;
     border: #555 1px solid;
+    border-radius: 5px;
 }
 
 /* Style de la liste non ordonnée */
