@@ -1,8 +1,10 @@
 /* Style général des pages */
+
 body{
     background-color: #4e4e4e;
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
+
 /* Barre de Navigation */
 .barnav {
     background-color: #333;
@@ -13,7 +15,6 @@ body{
     font-size: larger;
 }
 
-/* Style de la liste non ordonnée */
 .barnav ul {
     list-style-type: none;
     display:flex;
@@ -48,7 +49,7 @@ body{
 
 } 
 
-/*  *//* Reste des pages *//*  */
+/*  *//* *//*  */
 
 ::placeholder{
     text-align: center;
@@ -97,6 +98,7 @@ body{
     flex-wrap: wrap;
     border: #555 1px solid;
     border-radius: 5px;
+    padding: 10px;
 }
 .lien_quizz{
     margin: 0 auto;
@@ -105,6 +107,7 @@ body{
     text-align:center;
     border: #555 1px solid;
     border-radius: 5px;
+    padding:10px;
 }
 .api{
     margin: 0 auto;
@@ -113,8 +116,19 @@ body{
     text-align:center;
     border: #555 1px solid;
     border-radius: 5px;
+    padding:10px;
+}
+.api button{
+    background-color: #333;
+    padding: 5px;
+    margin: auto ;
+    color: #b98c36;
+    font-size: larger;
+    border-radius: 5px;
 }
  
+/*  *//* *//*  */
+
 /*page inscription */
 .inscription{
     display:block;

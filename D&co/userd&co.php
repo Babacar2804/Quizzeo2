@@ -20,7 +20,7 @@
             <div class="lien_quizz">
                 <h3>Rejoindre un Quizz</h3> <br>
                 <input class="textarea" type="textarea"placeholder="collez le lien ici"> </input>
-            </div><br>
+            </div><br><br>
             <div class="api">
                 <h3> Recuperer ma clé API</h3>
 <button type="button" id="boutapi" name="boutapi"><script></script> récupérer mon api</button>
