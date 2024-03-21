@@ -11,9 +11,7 @@
 <body>
 <?php include 'navbar.html';?><br><br>
     <div class="principal">
-   
         <div class="container">
-            <br><br>
             <div class="presentation">
                 <h1>Bienvenue sur Quizzeo</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum reiciendis nulla commodi magni officiis iste quas tempora architecto, velit ex temporibus, facere dicta fugit nam delectus obcaecati esse quibusdam nisi?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis laborum esse eos, aliquam dolorum repudiandae ullam et modi ea accusantium iste suscipit facilis minima totam quam ipsam vitae, dolores rem. Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eveniet animi hic soluta eligendi itaque dicta deleniti? Aliquam, vero repellat. Accusamus necessitatibus est dolorum facere, placeat tenetur hic saepe. Natus! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea dolorum et ipsa officiis, esse excepturi quaerat corporis labore est voluptatibus tenetur neque, sit aut maxime inventore ipsam! Error, animi hic.</p>
@@ -30,6 +28,4 @@
             </div>
         </div>
     </div>
-  
-   
 </body>

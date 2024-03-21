@@ -33,6 +33,15 @@ body{
     border: #555 1px solid;
     border-radius: 5px;
 }
+.inscription{
+    display:block;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+
+}
 .lien_quizz{
     margin: 0 auto;
     display:flex;
