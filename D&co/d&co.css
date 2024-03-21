@@ -4,7 +4,6 @@ body{
 }
 ::placeholder{
     text-align: center;
-    opacity: 50%;
     color:#b98c36;
 }
 .textarea{
@@ -45,24 +44,29 @@ body{
     background-color: #333;
     border: #555 1px solid;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 
 /* Style de la liste non ordonnée */
 .barnav ul {
     list-style-type: none;
     padding: 0;
+    margin: auto;
+    display: inline-flex;
+    padding-left: 1%;
 }
 
 /* Style des éléments de la liste */
 .barnav ul li {
-    display: inline;
+    display: inline-flex;
     margin: auto;
+    justify-content: auto;
 }
 
 /* Style des liens */
 .barnav ul li a {
     display: inline-flex;
-    margin:left 5px top 1px;
+    margin:left 5px;
     padding: 5px;
     color: #b98c36;
     text-decoration: none;
