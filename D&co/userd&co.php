@@ -20,7 +20,7 @@
             <div class="lien_quizz">
                 <p>Collez votre lien pour rejoindre un quizz ici:</p>
                 <br><br>
-                <input class="textarea" type="textarea"placeholder="mettez le lien"> </input>
+                <input class="textarea" type="textarea"placeholder="collez le lien ici"> </input>
             </div>
             <div class="api">
              <!-- <button type="button" id="boutapi" name="boutapi"><script></script> récupérer mon api</button>
