@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const connection = require('./config');
 
+
+
 const uniqid = require('uniqid');
 
 const app = express();
@@ -17,13 +19,15 @@ app.use((req, res, next) => {
 // Route pour créer une clé API
 app.post('/createApiKey', (req, res) => {
     const apiKey = uniqid(); // Générer une clé API unique
-
-    // Enregistrer la clé API dans la base de données
-    connection.query('INSERT INTO users (api_key) VALUES (?)', [apiKey],  (error, results, fields) => {
+    const sessionid = req.body.sessionId; // Récupérer l'ID de l'utilisateur depuis la session
+    // Mettre à jour la clé API dans la base de données pour l'utilisateur existant
+    connection.query('UPDATE users SET api_key = ? WHERE id_user = ?', [apiKey, sessionid], (error, results, fields) => {
         if (error) {
-            console.error('Erreur lors de la création de la clé API :', error);
-            res.status(500).json({ error: 'Erreur lors de la création de la clé API' });
+            console.error('Erreur lors de la mise à jour de la clé API :', error);
+            res.status(500).json({ error: 'Erreur lors de la mise à jour de la clé API' });
         } else {
+            console.log(sessionid);
+
             res.json({ apiKey }); // Envoyer la clé API générée en réponse
         }
     });

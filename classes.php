@@ -26,13 +26,11 @@ class BDD {
 }
 
 class Users {
-    public $db;
+    protected $db;
 
     public function __construct(BDD $db) {
         $this->db = $db;
     }
-    
-    
 
     public function getUserByEmail($email) {
         $query = "SELECT * FROM users WHERE email = :email";
@@ -41,52 +39,66 @@ class Users {
     }
 }
 
-class AdminSite extends Users {
-    
-    public function Users() {
-        $query = "SELECT * FROM users";
-        $statement = $this->db->executeQuery($query);
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
+class SimpleUsers extends Users {
+        
 
-public function UsersLogged() {
-    if (isset($_SESSION['logged_users'])) {
-        return $_SESSION['logged_users'];
-    } else {
-        return [];
-    }
-}
     
+}
+
+class Quizzer extends SimpleUsers {
     public function Quizzes() {
         $query = "SELECT * FROM quizzes";
         $statement = $this->db->executeQuery($query);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
-    
-        public function updateUserStatus($user_id, $status) {
-            // Vérifier si le statut est "active" ou "inactive"
-            $statut_compte = ($status === "active") ? 1 : 0;
-            $query = "UPDATE Users SET statut_compte = :statut_compte WHERE id_user = :user_id";
-            $params = array(':statut_compte' => $statut_compte, ':user_id' => $user_id);
-            $statement = $this->db->executeQuery($query, $params);
-            if ($statement) {
-                echo "Statut du compte utilisateur mis à jour avec succès.";
-            } else {
-                echo "Une erreur s'est produite lors de la mise à jour du statut du compte utilisateur.";
-            }
-        }
-    }
-    
-
-class ValCompte extends Users {
 }
+
 class AdminQuiz extends Quizzer {
 }
 
-class Quizzer extends SimpleUsers {
+class ValCompte extends Quizzer {
+
+
 }
 
-class SimpleUsers extends Users {
+class AdminSite extends ValCompte {
+    public function Users() {
+        $query = "SELECT * FROM users";
+        $statement = $this->db->executeQuery($query);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getUsersByStatus($status) {
+        $query = "SELECT id_user, pseudo, email FROM users WHERE status = :status";
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute(array(':status' => $status));
+        $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $users;
+    }
+
+    public function updateStatus($user_id, $status) {
+        $status_value = ($status === "active") ? 1 : 0;
+        $query = "UPDATE users SET status = :status WHERE id_user = :user_id";
+        $params = array(':status' => $status_value, ':user_id' => $user_id);
+        $statement = $this->db->executeQuery($query, $params);
+        if ($statement) {
+            echo "Statut de connexion de l'utilisateur mis à jour avec succès.";
+        } else {
+            echo "Une erreur s'est produite lors de la mise à jour du statut de connexion de l'utilisateur.";
+        }
+    }
+
+    public function updateUserStatus($user_id, $status) {
+        $statut_compte = ($status === "active") ? 1 : 0;
+        $query = "UPDATE Users SET statut_compte = :statut_compte WHERE id_user = :user_id";
+        $params = array(':statut_compte' => $statut_compte, ':user_id' => $user_id);
+        $statement = $this->db->executeQuery($query, $params);
+        if ($statement) {
+            echo "Statut du compte utilisateur mis à jour avec succès.";
+        } else {
+            echo "Une erreur s'est produite lors de la mise à jour du statut du compte utilisateur.";
+        }
+    }
 }
 
 ?>

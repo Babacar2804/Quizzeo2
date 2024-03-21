@@ -3,7 +3,7 @@ session_start();
 include 'classes.php'; 
 $db = new BDD();
 $adminSite = new AdminSite($db);
-$users = new Users($db);
+$users = new AdminSite($db);
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["user_id"]) && isset($_POST["status"])) {
     $user_id = $_POST["user_id"];
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 }
 
 $listeUtilisateurs = $adminSite->Users();
-$utilisateursConnectes = $adminSite->UsersLogged();
+$utilisateursCo = $adminSite->getUsersByStatus(1);
 $listeQuizzes = $adminSite->Quizzes();
 ?>
 
@@ -55,8 +55,6 @@ $listeQuizzes = $adminSite->Quizzes();
         <input type="hidden" name="logout" value="true">
         <button type="submit">Déconnexion</button>
     </form><br>
-    <?php var_dump($_SESSION); ?>
-
     <h1>Admin Dashboard</h1>
 
     <h2>Liste des utilisateurs créés :</h2>
@@ -77,8 +75,15 @@ $listeQuizzes = $adminSite->Quizzes();
     <h2>Utilisateurs connectés en ce moment :</h2>
     <ul>
         <?php 
-        foreach ($utilisateursConnectes as $utilisateur) : ?>
+        foreach ($utilisateursCo as $utilisateur) : ?>
             <li><?= $utilisateur['pseudo'] ?></li>
+        <?php endforeach; ?>
+    </ul>
+
+    <h2>Liste des quizzes :</h2>
+    <ul>
+        <?php foreach ($listeQuizzes as $quiz) : ?>
+            <li><?= $quiz['titre'] ?> - <?= $quiz['date_creation'] ?></li>
         <?php endforeach; ?>
     </ul>
 
