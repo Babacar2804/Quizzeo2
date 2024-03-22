@@ -9,11 +9,11 @@
 </head>
 
 <body>
-    <?php include 'navbar.html'; ?><br>
+    <?php include 'navbar.php'; ?><br>
     <h1 class="title">Bienvenue sur Quizzeo</h1>
     <br><br>
     <div class="container">
-    <h3>Présentation</h3>
+    <h2>Présentation</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum reiciendis nulla commodi magni officiis
             iste quas tempora architecto, velit ex temporibus, facere dicta fugit nam delectus obcaecati esse
             quibusdam nisi?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis laborum esse eos,

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php include 'navbar.html'; ?><br>
+    <?php include 'navbar.php'; ?><br>
     <h1 class="title">Admin Dashbord</h1>
     <br><br>
     <div class="containera">

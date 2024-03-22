@@ -32,8 +32,6 @@ body{
 
 .barnav ul li {
     margin: auto;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2); 
-    border-radius:10px;
 }
 .barnav ul li a {
     display: inline-flex;
@@ -45,17 +43,18 @@ body{
 }
 
 .barnav ul li a:hover {
-    background-color:#667;
     transition: all;
-    transition-duration: 2s;
-    border: #667;
-    border-radius: 10px;
+    transition-duration: 0.5s;
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.30);
+    border-radius:10px; 
 }
 .main-li{
     display:inline-flex;
     align-items: center;
     margin-inline: auto;
     justify-content: center;
+    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2); 
+    border-radius:10px;
 }
 .main-li img{
     margin-right: auto; 
@@ -92,12 +91,13 @@ body{
     border-radius: 5px; 
     color: rgb(206, 206, 206);
     background-color: #333;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2); 
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.15); 
     justify-content: center;
     text-align:center;
 }
 .container p{
     text-align: justify;
+    font-size: larger;
 }
 /* Page User */
 .api{
@@ -108,7 +108,7 @@ body{
     border: #555 1px solid;
     border-radius: 5px;
     padding:10px;
-    box-shadow:5px 5px 5px rgba(0.2, 0.2, 0.2, 0.2);
+    box-shadow:0 0 10px rgba(0.2, 0.2, 0.2, 0.2); 
     background-color: #333;
     padding: 5px;
     margin: auto ;
@@ -118,8 +118,8 @@ body{
 
 .api:hover{
     transition: all;
-    transition-duration: 2s; 
-    background-color: #667; 
+    transition-duration: 0.5s;
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.30);  
 }
 
 /*  *//* *//*  */
@@ -139,7 +139,7 @@ body{
     border-radius: 5px; 
     color: rgb(206, 206, 206);
     background-color: #333;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2); 
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.15); 
 }
 .inscription input{
     background-color: #333;
@@ -163,7 +163,7 @@ form input:hover{
     border-radius: 5px; 
     color: rgb(206, 206, 206);
     background-color: #333;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2);
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.15); 
     justify-content: center;
     text-align:center;
     
@@ -177,7 +177,7 @@ form input:hover{
     border-radius: 5px; 
     color: rgb(206, 206, 206);
     background-color: #333;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2);
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.15); 
     justify-content: center;
     text-align:center;
     
@@ -191,7 +191,7 @@ form input:hover{
     border-radius: 5px; 
     color: rgb(206, 206, 206);
     background-color: #333;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2);
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.15); 
     justify-content: center;
     text-align:center;
     
@@ -225,8 +225,9 @@ form input:hover{
 }
 .but-adm:hover{
     transition: all;
-    transition-duration: 2s; 
-    background-color: #667; 
+    transition-duration: 0.5s;
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.30);  
+
 }
 
 .inscription-adm{

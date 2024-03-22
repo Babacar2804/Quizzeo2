@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <?php include 'navbar.html'; ?><br><br>
+    <?php include 'navbar.php'; ?><br><br>
 
     <br><br>
     <div class="inscription">
