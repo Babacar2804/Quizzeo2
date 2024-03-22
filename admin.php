@@ -5,7 +5,7 @@ $db = new BDD();
 $adminSite = new AdminSite($db);
 $users = new AdminSite($db);
 
-$password = ''; // Initialiser la variable du mot de passe généré
+$password = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["user_id"]) && isset($_POST["status"])) {
     $user_id = $_POST["user_id"];
@@ -31,12 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             $statement = $db->executeQuery($query, $params);
 
             if ($statement) {
-                $userAdded = true;
+                echo '<script>alert("Utilisateur ajouté avec succès.");</script>';
             } else {
                 $error = "Une erreur s'est produite lors de l'ajout de l'utilisateur.";
             }
         }
     }
+}
+if (!empty($error)) {
+    echo "<p style='color: red;'>$error</p>";
 }
 
 $listeUtilisateurs = $adminSite->Users();
@@ -83,24 +86,8 @@ $listeQuizzes = $adminSite->Quizzes();
         <?php endforeach; ?>
     </ul>
 
-    <h2>Liste des quizzes :</h2>
-    <ul>
-        <?php foreach ($listeQuizzes as $quiz) : ?>
-            <li><?= $quiz['titre'] ?> - <?= $quiz['date_creation'] ?></li>
-        <?php endforeach; ?>
-    </ul>
-
-    <?php 
-    if (!empty($error)) {
-        echo "<p style='color: red;'>$error</p>";
-    }
-    if (isset($userAdded) && $userAdded) {
-        echo '<script>alert("Utilisateur ajouté avec succès.");</script>';
-    }
-    ?>
 
     <button onclick="showForm()">Créer un compte</button>
-
     <div id="creationForm" style="display: none;">
         <form id="userCreationForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="pseudo">Pseudo:</label>
