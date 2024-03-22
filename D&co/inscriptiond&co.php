@@ -20,7 +20,7 @@
             <input type="password" id="password" name="password" placeholder="mot de passe" required></input><br><br>
             <img src="\Quizzeo2\captcha.php" /><br><br>
             <input type="text" name="captcha" placeholder="rentrez le captcha"></input><br><br>
-            <input type="submit" id="submit" name="submit" value="S'inscrire"></input>
+            <button type="submit"name="submit" class="api"><script></script> S'inscrire</button>
         </form>
     </div>
 

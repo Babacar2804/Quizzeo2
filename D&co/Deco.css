@@ -46,7 +46,6 @@ body{
     transition: all;
     transition-duration: 0.5s;
     box-shadow:0 0 10px rgba(230, 251, 1, 0.30);
-    border-radius:10px; 
 }
 .main-li{
     display:inline-flex;
@@ -77,8 +76,9 @@ body{
 
 .textarea:hover{
     transition: all;
-    transition-duration: 2s; 
+    transition-duration: 0.5s; 
     background-color: #667;  
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.30); 
 }
 
 /* container des pages */
@@ -150,8 +150,9 @@ body{
 }
 form input:hover{
     transition: all;
-    transition-duration: 2s; 
-    background-color: #667; 
+    transition-duration: 0.5s; 
+    background-color: #667;
+    box-shadow:0 0 10px rgba(230, 251, 1, 0.30);  
 }
 /* page admin */
 .containera{
