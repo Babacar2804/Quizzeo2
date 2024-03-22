@@ -5,6 +5,8 @@ $db = new BDD();
 $adminSite = new AdminSite($db);
 $users = new AdminSite($db);
 
+$password = ''; // Initialiser la variable du mot de passe généré
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["user_id"]) && isset($_POST["status"])) {
     $user_id = $_POST["user_id"];
     $status = $_POST["status"];
@@ -14,10 +16,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["user_id"]) && isset($_
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $pseudo = $_POST["pseudo"];
     $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+    $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $role = 5;
 
-    if (empty($pseudo) || empty($email) || empty($password)) {
+    if (empty($pseudo) || empty($email) || empty($_POST["password"])) {
         $error = "Tous les champs sont requis.";
     } else {
         $existingUser = $users->getUserByEmail($email);
@@ -25,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
             $error = "Cet email est déjà utilisé. Veuillez choisir un autre.";
         } else {
             $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, 'active', :id_role)";
-            $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $password, ':id_role' => $role);
+            $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashed_password, ':id_role' => $role);
             $statement = $db->executeQuery($query, $params);
 
             if ($statement) {
@@ -40,6 +42,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 $listeUtilisateurs = $adminSite->Users();
 $utilisateursCo = $adminSite->getUsersByStatus(1);
 $listeQuizzes = $adminSite->Quizzes();
+
+// Fonction pour générer un mot de passe aléatoire
+function generateRandomPassword($length = 8) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $password = '';
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $password;
+}
+
+if (isset($_POST['generate_password'])) {
+    $password = generateRandomPassword();
+}
 ?>
 
 <!DOCTYPE html>
@@ -96,10 +112,10 @@ $listeQuizzes = $adminSite->Quizzes();
     }
     ?>
 
-    <button onclick="showForm()">Créer un compte manuellement</button>
+    <button onclick="showForm()">Créer un compte</button>
 
     <div id="creationForm" style="display: none;">
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <form id="userCreationForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <label for="pseudo">Pseudo:</label>
             <input type="text" id="pseudo" name="pseudo" required><br><br>
 
@@ -108,7 +124,12 @@ $listeQuizzes = $adminSite->Quizzes();
 
             <label for="password">Mot de passe :</label>
             <input type="password" id="password" name="password" required><br><br>
-            <button type="button" onclick="generatePassword()">Générer</button><br><br>
+
+            <label for="generatedPassword">Mot de passe généré:</label>
+            <span id="generatedPassword"></span><br><br>
+
+            <button onclick="generatePassword()">Générer un mot de passe</button>
+
             <input type="submit" name="submit" value="Ajouter l'utilisateur">
         </form>
     </div>
