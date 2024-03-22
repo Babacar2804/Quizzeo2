@@ -11,13 +11,21 @@ function showPopup(message) {
 }
 
 function generatePassword() {
-    var passwordLength = 12; 
-    var passwordChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+    var generatedPasswordField = document.getElementById("generatedPassword");
+    var password = generateRandomPassword();
+    generatedPasswordField.innerText = password;
+}
 
-    for (var i = 0; i < passwordLength; i++) {
-        var randomIndex = Math.floor(Math.random() * passwordChars.length);
-        password += passwordChars.charAt(randomIndex);
+function generateRandomPassword(length = 8) {
+    var characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var password = '';
+    for (var i = 0; i < length; i++) {
+        password += characters.charAt(Math.floor(Math.random() * characters.length));
     }
+    return password;
+}
 
-    document.getElementById("password").value = password;
+function showForm() {
+    var form = document.getElementById("creationForm");
+    form.style.display = "block";
 }

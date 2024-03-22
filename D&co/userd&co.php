@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="d&co.css">
+    <link rel="stylesheet" href="D&co.css">
     <title>Usertestd&co</title>
 </head>
 
@@ -23,7 +23,7 @@
             </div><br><br>
             <div class="api">
                 <h3> Recuperer ma clé API</h3>
-<button type="button" id="boutapi" name="boutapi"><script></script> récupérer mon api</button>
+<button type="button" id="boutapi" name="boutapi"class="apibut"><script></script> récupérer mon api</button>
             </div>
         </div>
     </div>
