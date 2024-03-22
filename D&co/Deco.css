@@ -127,13 +127,12 @@ body{
 /*page inscription */
 .inscription{
     display:block;
-    align-items: center;
     justify-content: center;
     flex-wrap: wrap;
     text-align: center;
     width: 50%;
     max-width: 500px; 
-    margin: 0 auto; 
+    margin: auto; 
     padding: 20px;
     border: #555 1px solid;
     border-radius: 5px; 
@@ -141,6 +140,7 @@ body{
     background-color: #333;
     box-shadow:0 0 10px rgba(230, 251, 1, 0.15); 
 }
+
 .inscription input{
     background-color: #333;
     border-radius: 5px;

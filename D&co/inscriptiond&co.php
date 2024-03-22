@@ -9,9 +9,8 @@
 </head>
 
 <body>
-    <?php include 'navbar.php'; ?><br><br>
-
     <br><br>
+    <div class="carré"></div>
     <div class="inscription">
         <h1>Inscription</h1>
         <form method="post" id="registrationForm" action="#">
