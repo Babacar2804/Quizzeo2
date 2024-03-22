@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
     $email = $_POST["email"];
     $hashed_password = password_hash($_POST["password"], PASSWORD_DEFAULT);
     $role = 5;
+    $compte= 1;
 
     if (empty($pseudo) || empty($email) || empty($_POST["password"])) {
         $error = "Tous les champs sont requis.";
@@ -26,8 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
         if ($existingUser) {
             $error = "Cet email est déjà utilisé. Veuillez choisir un autre.";
         } else {
-            $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, 'active', :id_role)";
-            $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashed_password, ':id_role' => $role);
+            $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, :compte, :id_role)";
+            $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $hashed_password,':compte' => $compte, ':id_role' => $role);
             $statement = $db->executeQuery($query, $params);
 
             if ($statement) {

@@ -12,7 +12,7 @@ if(isset($_POST['captcha'])){
             $email = $_POST["email"];
             $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
             $role= 5;
-    
+            $compte= 0;
                 
         if (empty($pseudo) || empty($email) || empty($password)) {
             $error = "Tous les champs sont requis.";
@@ -22,8 +22,8 @@ if(isset($_POST['captcha'])){
                 $error = "Cet email est déjà utilisé. Veuillez choisir un autre.";
                 echo $error;
             } else {
-                $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, 'active', :id_role)";
-                $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $password, ':id_role' => $role);
+                $query = "INSERT INTO users (pseudo, email, password, statut_compte, id_role) VALUES (:pseudo, :email, :password, :compte, :id_role)";
+                $params = array(':pseudo' => $pseudo, ':email' => $email, ':password' => $password,':compte' => $compte, ':id_role' => $role);
                 $statement = $db->executeQuery($query, $params);
                 
                 if ($statement) {
