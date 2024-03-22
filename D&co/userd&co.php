@@ -9,10 +9,11 @@
 </head>
 
 <body>
-    <?php include 'navbar.html'; ?><br><br>
-
+    <?php include 'navbar.html'; ?><br>
+    <h1 class="title">Bienvenue sur Quizzeo</h1>
+    <br><br>
     <div class="container">
-        <h1>Bienvenue sur Quizzeo</h1>
+    <h3>Présentation</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum reiciendis nulla commodi magni officiis
             iste quas tempora architecto, velit ex temporibus, facere dicta fugit nam delectus obcaecati esse
             quibusdam nisi?Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officiis laborum esse eos,
@@ -23,17 +24,17 @@
             dolorum et ipsa officiis, esse excepturi quaerat corporis labore est voluptatibus tenetur neque, sit aut
             maxime inventore ipsam! Error, animi hic.</p>
     </div>
-        <br><br>
-        <div class="container">
-            <h3>Rejoindre un Quizz</h3> <br>
-            <input class="textarea" type="textarea" placeholder="collez le lien ici"> </input>
-        </div><br><br>
-        <div class="container">
-            <h3> Recuperer ma clé API</h3>
-            <button type="button" id="boutapi" name="boutapi" class="api">
-                <script></script> récupérer mon api
-            </button>
-        </div>
+    <br><br>
+    <div class="container">
+        <h3>Rejoindre un Quizz</h3> <br>
+        <input class="textarea" type="textarea" placeholder="collez le lien ici"> </input>
+    </div><br><br>
+    <div class="container">
+        <h3> Recuperer ma clé API</h3>
+        <button type="button" id="boutapi" name="boutapi" class="api">
+            <script></script> récupérer mon api
+        </button>
+    </div>
     </div>
 
 </body>

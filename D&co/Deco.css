@@ -16,7 +16,6 @@ body{
 .barnav ul {
     list-style-type: none;
     display: flex;
-    width: 100%;
 }
 
 .barnav ul li {
@@ -47,17 +46,14 @@ body{
     text-decoration: none;
     text-align: justify;
     margin-inline: auto;
-    width: auto;
 }
 
 .barnav ul li a:hover {
     background-color:#667;
     transition: all;
     transition-duration: 2s;
-    margin: auto;
     border: #667;
     border-radius: 10px;
-    width: auto;
 }
 
 /*  *//* *//*  */
@@ -96,6 +92,9 @@ body{
     box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2); 
     justify-content: center;
     text-align:center;
+}
+.container p{
+    text-align: justify;
 }
 /* Page User */
 .api{
@@ -194,9 +193,43 @@ form input:hover{
     text-align:center;
     
 }
-.containerli{
-    color: #b98c36;
+.containerul{
+    color: rgb(206, 206, 206);
     font-size: larger;
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto; 
+    padding: 20px;
+}
+.containerli{
+    display: inline;
+}
+.but-adm{
+    margin-left: 10px;
+    justify-content: center;
+    text-align:center;
+    border: #555 1px solid;
+    border-radius: 5px;
+    padding:10px;
+    box-shadow:5px 5px 5px rgba(0.2, 0.2, 0.2, 0.2);
+    background-color: #333;
+    padding: 5px;
+    color: #b98c36;
+    font-size: larger;  
+}
+.but-adm:hover{
+    transition: all;
+    transition-duration: 2s; 
+    background-color: #667; 
+}
+.title{
+    color: rgb(206, 206, 206);
+    text-align: center;
+}
+.inscription-adm{
     display:block;
     align-items: center;
     justify-content: center;
@@ -206,5 +239,28 @@ form input:hover{
     max-width: 500px; 
     margin: 0 auto; 
     padding: 20px;
-    box-shadow:10px 10px 10px rgba(0.2, 0.2, 0.2, 0.2); 
+    color: rgb(206, 206, 206);
+    background-color: #333;
+}
+.inscription-adm input{
+    background-color: #333;
+    border-radius: 5px;
+    color: #b98c36;
+    font-size: larger;
+
+}
+.containerulco{
+    color: rgb(206, 206, 206);
+    font-size: larger;
+    display:inline-block;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto; 
+    padding: 20px;
+}
+.containerlico{
+    display: flex;
+    margin-left: 10px;
 }
