@@ -56,7 +56,7 @@ class Quizzer extends SimpleUsers {
 class AdminQuiz extends Quizzer {
 }
 
-class ValCompte extends Quizzer {
+class ValCompte extends AdminQuiz {
 
 
 }
