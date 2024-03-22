@@ -43,19 +43,6 @@ $listeUtilisateurs = $adminSite->Users();
 $utilisateursCo = $adminSite->getUsersByStatus(1);
 $listeQuizzes = $adminSite->Quizzes();
 
-// Fonction pour générer un mot de passe aléatoire
-function generateRandomPassword($length = 8) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $password = '';
-    for ($i = 0; $i < $length; $i++) {
-        $password .= $characters[rand(0, strlen($characters) - 1)];
-    }
-    return $password;
-}
-
-if (isset($_POST['generate_password'])) {
-    $password = generateRandomPassword();
-}
 ?>
 
 <!DOCTYPE html>
