@@ -49,11 +49,10 @@ if (isset($_POST['captcha'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSCRIPTION</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style1.css">
 </head>
-<?php include 'nav.php'; ?>
-
 <body data-barba="wrapper">
+<?php include 'nav.php'; ?>
     <div class="pages" data-barba="container" data-barba-namespace="about">
 
         <div class="cover">

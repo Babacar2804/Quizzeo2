@@ -61,11 +61,12 @@ $listeQuizzes = $adminSite->Quizzes();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style6.css">
 </head>
-<?php include 'nav.php'; ?>
 
 <body data-barba="wrapper">
+<?php include 'nav.php'; ?>
+
     <div class="pages" data-barba="container" data-barba-namespace="home">
         <h1><span>A</span><span>d</span><span>m</span><span>i</span><span>n</span> Dashboard</h1>
         <div class="bigcard">
