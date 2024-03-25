@@ -14,14 +14,14 @@ barba.init({
             opacity: 0,
           });
           tl.from(".home-image", {
-            x: "-100%", // Start from the left (-100%)
+            x: "-100%",
             opacity: 0,
-            duration: 1, // Adjust duration as needed
+            duration: 1, 
           });
           tl.from(".bigcard", {
-            x: "-100%", // Start from the left (-100%)
+            x: "-100%",
             opacity: 0,
-            duration: 0.5, // Adjust duration as needed
+            duration: 0.5, 
           });
           tl.from("h1 span", {
             y: 100,
