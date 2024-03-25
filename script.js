@@ -25,11 +25,6 @@ function generateRandomPassword(length = 8) {
     return password;
 }
 
-function showForm() {
-    var form = document.getElementById("creationForm");
-    form.style.display = "block";
-}
-
 function showQCM() {
     document.getElementById('QuizzInput').value = 'qcm';
     const questionDiv = createQuestionDiv('qcm');
