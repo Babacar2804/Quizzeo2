@@ -85,7 +85,7 @@ if (isset($_POST['captcha'])) {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
-    <script src="app2.js"></script>
+    <script src="app.js"></script>
 </body>
 
 </html>
