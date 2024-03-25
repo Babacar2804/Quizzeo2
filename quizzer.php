@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             // Génération du lien unique
             function generateUniqueLink($id_quizz) {
                 $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                $lien = 'http://localhost/Projet%20Web/Quizzeo2/quizz.php/'. $id_quizz . '/';;
+                $lien = 'http://localhost/Projet%20Web/Quizzeo2/quizz.php?'."id_quizz=". $id_quizz . '/';
                 for ($i = 0; $i < 10; $i++) {
                     $lien .= $caracteres[rand(0, strlen($caracteres) - 1)];
                 }
@@ -64,9 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
 }
 
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,6 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <form action="" method="post">
