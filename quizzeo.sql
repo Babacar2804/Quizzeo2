@@ -1,7 +1,7 @@
-DROP Database if EXISTS quizzeo;
-CREATE DATABASE quizzeo;
+DROP Database if EXISTS quizzeo2;
+CREATE DATABASE quizzeo2;
 
-use quizzeo;
+use quizzeo2;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
