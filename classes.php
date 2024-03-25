@@ -87,7 +87,15 @@ class Quizzer extends Users {
         $result= $this->executeInsertQuery("INSERT INTO Reponses (reponses, id_question) VALUES (:reponses, :id_question)", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
     }
-    
+    public function saveQuizLink($id_quizz, $lien) {
+        $params = [
+            ':id_quizz' => (int) $id_quizz,
+            ':lien' => htmlspecialchars($lien)
+        ];
+
+        $result = $this->executeInsertQuery("UPDATE Quizzes SET lien = :lien WHERE id_quizz = :id_quizz", $params);
+        return $result ? $this->db->connection->lastInsertId() : false;
+    }
     public function insert_reponse_user($id_user, $id_question, $id_reponse, $statut_rep) {
         $params = [
             ':id_user' => (int) $id_user,

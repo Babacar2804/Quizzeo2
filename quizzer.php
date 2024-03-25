@@ -5,6 +5,7 @@ include 'classes.php';
 $db = new BDD();
 $quizzer=new Quizzer($db);
 
+$lien = '';
 var_dump($_SESSION);
 // Récupérez l'ID de l'utilisateur à partir de la variable de session
 $id_user = $_SESSION['user_id'];
@@ -25,6 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $id_quizz = $quizzer->insert_quizz($id_user, $titre, $date_creation,  $type, $description, $statut_quizz);
 
     if ($id_quizz) {
+
         // Insérer les questions et les réponses
         foreach ($questions as $index => $question) {
             // Insérer la question
@@ -42,10 +44,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 echo "La question ne peut pas être ajoutée";
                 break;
             }
+            // Génération du lien unique
+            function generateUniqueLink($id_quizz) {
+                $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                $lien = 'http://localhost/Projet%20Web/Quizzeo2/quizz.php/'. $id_quizz . '/';;
+                for ($i = 0; $i < 10; $i++) {
+                    $lien .= $caracteres[rand(0, strlen($caracteres) - 1)];
+                }
+                return $lien;
+            }
+         $lien = generateUniqueLink($id_quizz);
+        
+         // Sauvegarde du lien avec le quiz dans la base de données
+         $quizzer->saveQuizLink($id_quizz, $lien);
         }
     } else {
         echo "L'insertion du quizz a échoué";
     }
+
 }
 
 
@@ -81,8 +97,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <button type="button" onclick="showQCM()">Ajouter un QCM</button>
     <button type="button" onclick="showSondage()">Ajouter un Sondage</button>
     <br><br>
-
     <input type="submit" name="submit" value="Ajouter le Quizz">
+    <label for="lienGenere">Lien du Quizz :</label><br>
+    <input type="text" id="lienGenere" name="lienGenere" value="<?php echo $lien; ?>" readonly><br><br>
 </form>
 
 </body>
