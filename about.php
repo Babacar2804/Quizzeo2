@@ -13,15 +13,10 @@
         <div class="cover">
             <span></span><span></span><span></span><span></span><span></span>
         </div>
-        <p>Welcome to <span>Quizzeo</span></p>
-        <img src="bg.png" alt="Image" class="home-image">
-        <div class="links-container">
-            <a href="Inscription.php"><span>Inscription</span></a>
-            <a href="Connexion.php"><span>Connexion</span></a>
-            <a href="about.php"><span>About</span></a>
-
-        </div>
-        </div>
+        <p>Welcome to <span>Quizzeo</span></p><br>
+        <h1><span>A</span><span>B</span><span>O</span><span>U</span><span>T</span></h1>
+        <a href="index.php">Page D'accueil <span>Let's Go!</span></a>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>

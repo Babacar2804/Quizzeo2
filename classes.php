@@ -122,7 +122,28 @@ class AdminQuiz extends Quizzer {
 }
 
 class ValCompte extends AdminQuiz {
-
+    public function InactiveAccounts() {
+        $query = "SELECT id_user, pseudo FROM users WHERE statut_compte = 0";
+        $statement = $this->db->executeQuery($query);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function activateAccount($user_id) {
+        $query = "UPDATE users SET statut_compte = 1 WHERE id_user = :user_id";
+        $params = array(':user_id' => $user_id);
+        $statement = $this->db->executeQuery($query, $params);
+        return $statement !== false;
+    }
+    public function UsersAccounts() {
+        $query = "SELECT id_user, pseudo FROM users WHERE id_role = 5";
+        $statement = $this->db->executeQuery($query);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function updateUserRole($userId, $newRoleId) {
+        $query = "UPDATE Users SET id_role = :newRoleId WHERE id_user = :userId";
+        $params = array(':newRoleId' => $newRoleId, ':userId' => $userId);
+        $statement = $this->db->executeQuery($query, $params);
+        return $statement !== false;
+    }
 
 }
 
