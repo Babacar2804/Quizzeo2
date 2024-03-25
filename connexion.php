@@ -42,28 +42,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])){
         }
         exit(); 
     } else {
-        echo "Identifiants invalides. Veuillez réessayer.";
-        // var_dump($user); 
-        // var_dump(password_verify($password, $user['password'])); 
+        echo "<script>alert('Identifiants invalides. Veuillez réessayer.');</script>";
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>CONNEXION</title>
+    <link rel="stylesheet" href="style5.css">
 </head>
-<body>
-    <h1>Connexion</h1>
-    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" name="username" required><br><br>
-        <label for="password">Mot de passe :</label>
-        <input type="password" name="password" required><br><br>
-        <input type="submit" name="login" value="Se connecter">
-    </form>
+<?php include 'nav.php'; ?>
+<body data-barba="wrapper">
+<div>
+    <div class="pages" data-barba="container" data-barba-namespace="about">
+        <div class="cover">
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <div class="container">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+        <h2>CONNEXION</h2>
+
+            <div class="txt_field">
+                <input type="text" name="username" required>
+                <span></span>
+                <label>Pseudo</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="password" required>
+                <span></span>
+                <label>Mot De Passe</label>
+            </div>
+            <input name="login" type="Submit" value="Se connecter"><br><br>
+            <label>Pas encore inscrit? <a href="inscription.php">Inscription</a></label>
+
+        </form>
+        </div>
+    </div>
+</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="app.js"></script>
 </body>
 </html>
