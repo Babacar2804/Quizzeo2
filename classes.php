@@ -23,6 +23,9 @@ class BDD {
         $statement->execute($params);
         return $statement;
     }
+    public function getLastInsertedId() {
+        return $this->connection->lastInsertId();
+    }
 }
 class Users {
     protected $db;
