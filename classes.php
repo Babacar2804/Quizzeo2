@@ -24,7 +24,6 @@ class BDD {
         return $statement;
     }
 }
-
 class Users {
     protected $db;
 
@@ -45,12 +44,67 @@ class SimpleUsers extends Users {
     
 }
 
-class Quizzer extends SimpleUsers {
+class Quizzer extends Users {
     public function Quizzes() {
         $query = "SELECT * FROM quizzes";
         $statement = $this->db->executeQuery($query);
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
+   
+    public function insert_quizz($id_user, $titre, $date_creation, $type, $description, $statut_quizz) {
+        $params = [
+            ':titre' => htmlspecialchars($titre),
+            ':date_creation' => htmlspecialchars($date_creation),
+            ':type' => htmlspecialchars($type),
+            ':description' => htmlspecialchars($description),
+            ':statut_quizz' => htmlspecialchars($statut_quizz),
+            ':id_user' => (int) $id_user
+        ];
+    
+        $result = $this->executeInsertQuery("INSERT INTO Quizzes (id_user,titre, date_creation,  type, Description, statut_quizz) VALUES (:id_user,:titre, :date_creation, :type, :description, :statut_quizz)", $params);
+        return $result ? $this->db->connection->lastInsertId() : false;
+    }
+    
+    public function insert_question($question, $id_quizz) {
+        $params = [
+            ':question' => htmlspecialchars($question),
+            ':id_quizz' => (int) $id_quizz
+        ];
+    
+       $result= $this->executeInsertQuery("INSERT INTO Questions (question, id_quizz) VALUES (:question, :id_quizz)", $params);
+        return $result ? $this->db->connection->lastInsertId() : false;
+    }
+    
+    public function insert_reponse($reponses, $id_question) {
+        $params = [
+            ':reponses' => htmlspecialchars($reponses),
+            ':id_question' => (int) $id_question
+        ];
+    
+        $result= $this->executeInsertQuery("INSERT INTO Reponses (reponses, id_question) VALUES (:reponses, :id_question)", $params);
+        return $result ? $this->db->connection->lastInsertId() : false;
+    }
+    
+    public function insert_reponse_user($id_user, $id_question, $id_reponse, $statut_rep) {
+        $params = [
+            ':id_user' => (int) $id_user,
+            ':id_question' => (int) $id_question,
+            ':id_reponse' => (int) $id_reponse,
+            ':statut_rep' => htmlspecialchars($statut_rep)
+        ];
+    
+        return $this->executeInsertQuery("INSERT INTO Reponse_user (id_user, id_question, id_reponse, statut_rep) VALUES (:id_user, :id_question, :id_reponse, :statut_rep)", $params);
+    }
+    
+    public function executeInsertQuery($query, $params) {
+        $stmt = $this->db->connection->prepare($query);
+        foreach ($params as $key => &$value) {
+            $stmt->bindParam($key, $value, PDO::PARAM_STR);
+        }
+        return $stmt->execute();
+    }
+    
+    
 }
 
 class AdminQuiz extends Quizzer {
