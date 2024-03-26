@@ -48,6 +48,6 @@ if(isset($session_user_id)) {
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <button type="button" id="generateApiKey" name="generateApiKey" data-session-id="<?php echo $session_user_id; ?>">Récupérer mon API</button>
     <!-- section pour rejoindre un quizz (coller un lien)  -->
-    <script src='api.js'></script>
+    <script src='../js/api.js'></script>
 </body>
 </html>

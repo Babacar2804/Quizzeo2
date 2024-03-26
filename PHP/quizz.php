@@ -30,7 +30,7 @@ if (isset($_GET['id_quizz'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
 <h1>Quizz</h1>

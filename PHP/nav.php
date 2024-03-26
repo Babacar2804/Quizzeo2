@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navbar</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="navbar-brand">
-            <a href="index.php"><img src="bg.png" alt="Logo"></a>
+            <a href="../index.php"><img src="../img/bg.png" alt="Logo"></a>
         </div>
         <ul class="navbar-links">
             <?php
