@@ -54,12 +54,11 @@ class Quizzer extends Users {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
    
-    public function insert_quizz($id_user, $titre, $date_creation, $type, $statut_quizz) {
+    public function insert_quizz($id_user, $titre, $date_creation, $type) {
         $params = [
             ':titre' => htmlspecialchars($titre),
             ':date_creation' => htmlspecialchars($date_creation),
             ':type' => htmlspecialchars($type),
-            ':statut_quizz' => htmlspecialchars($statut_quizz),
             ':id_user' => (int) $id_user
         ];
     
@@ -138,6 +137,43 @@ class Quizzer extends Users {
         } else {
             echo "<script>alert('Une erreur s\'est produite lors de la mise à jour du statut du quizz.');</script>";
         }
+    }
+    public function getQuizzData($id_quizz) {
+        $query = "SELECT * FROM quizzes WHERE id_quizz = :idQuizz";
+        $params = [':idQuizz' => $id_quizz];
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getQuestions($id_quizz) {
+        $query = "SELECT * FROM questions WHERE id_quizz = :idQuizz";
+        $params = [':idQuizz' => $id_quizz];
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function deleteQuestions($id_quizz) {
+        $query = "DELETE FROM questions WHERE id_quizz = :idQuizz";
+        $params = [':idQuizz' => $id_quizz];
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute($params);
+    }
+
+    public function insertQuestion($question, $id_quizz) {
+        $query = "INSERT INTO questions (question, id_quizz) VALUES (:question, :idQuizz)";
+        $params = [':question' => $question, ':idQuizz' => $id_quizz];
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute($params);
+        return $this->db->connection->lastInsertId();
+    }
+
+    public function insertReponse($reponse, $id_question) {
+        $query = "INSERT INTO reponses (reponses, id_question) VALUES (:reponse, :idQuestion)";
+        $params = [':reponse' => $reponse, ':idQuestion' => $id_question];
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute($params);
     }
     
     

@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $questions = $_POST["questions"];
     
     // Utilisez la fonction d'insertion pour ajouter le quizz
-    $id_quizz = $quizzer->insert_quizz($id_user, $titre, $date_creation,  $type, $description, $statut_quizz);
+    $id_quizz = $quizzer->insert_quizz($id_user, $titre, $date_creation,  $type);
 
     if ($id_quizz) {
 

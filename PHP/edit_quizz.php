@@ -7,10 +7,7 @@ $user_id = $_SESSION['user_id'];
 $quizzer=new Quizzer($db);
 //Récupérer les quizz
 
-
 // Vérifiez si l'ID du quizz à mettre à jour est défini
-
-
 
 // Vérifiez si l'ID du quizz à mettre à jour est défini
 if (isset($_GET['id_quizz'])) {
