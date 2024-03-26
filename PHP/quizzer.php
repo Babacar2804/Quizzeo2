@@ -7,18 +7,28 @@ $quizz = new Quizzer($db);
 $user_id = $_SESSION['user_id'];
 $reqs = $quizz->affichquizz($user_id);
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset ($_POST['lance'])) {
         $quiz_id = $_POST['quiz_id'];
+        $lien = generateUniqueLink($quiz_id);
+        $quizz->saveQuizLink($quiz_id, $lien);
         $quizz->updateQuizzStatus($quiz_id, 'lance');
     } elseif (isset ($_POST['termine'])) {
         $quiz_id = $_POST['quiz_id'];
+        $quizz->deleteQuizLink($quiz_id);
         $quizz->updateQuizzStatus($quiz_id, 'termine');
     }
 }
-// $quiz_id = $_POST['quiz_id'];
-// $quizz->updateQuizzStatus($quiz_id, 'creation');
+
+function generateUniqueLink($id_quizz)
+{
+    $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    $lien = 'http://localhost/Projet%20Web/Quizzeo2/php/quizz.php?' . "id_quizz=" . $id_quizz . '/';
+    for ($i = 0; $i < 10; $i++) {
+        $lien .= $caracteres[rand(0, strlen($caracteres) - 1)];
+    }
+    return $lien;
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,15 +55,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <ul>
                     <?php foreach ($reqs as $req): ?>
                         <li>
-                        <h3><?= $req['titre'] ?></h3>
-                            <h5>Type: <?= $req['type'] ?></h5>
-                            <form method="post">
+                            <h3>
+                                <?= $req['titre'] ?>
+                            </h3>
+                            <h5>Type:
+                                <?= $req['type'] ?>
+                            </h5>
+
+                            <a href="editquizz.php?id=<?= $req['id_quizz'] ?>"><button>Modifier</button></a>
+                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                                 <input type="hidden" name="quiz_id" value="<?= $req['id_quizz'] ?>">
-                                <button type="submit" name="creation">
-                                    <a href="editquizz.php?id=<?= $req['id_quizz'] ?>">Modifier</a>
-                                </button>
                                 <button type="submit" name="lance">Lancer</button>
                                 <button type="submit" name="termine">Terminer</button>
+                                <?php if ($req['statut_quizz'] == 'lance'): ?>
+                                    <h5>Lien du quiz: <a href="<?= $req['lien'] ?>" target="_blank">
+                                            <?= $req['lien'] ?>
+                                        </a></h5>
+                                <?php endif; ?>
                             </form>
                         </li>
                     <?php endforeach; ?>
@@ -61,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
 
             <div class="card">
-                <!-- Autres éléments de la page -->
+                <a href="ajout_quizz.php"><button>Creer un Quizz</button></a>
             </div>
 
             <div class="card">

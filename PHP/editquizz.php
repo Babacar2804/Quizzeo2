@@ -46,7 +46,7 @@ if (isset($_GET['id_quizz'])) {
 </head>
 <body>
 <h1>Modifier Quizz</h1><br>
-<form action="" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     <label for="titre">Titre du Quizz :</label><br>
     <input type="text" id="titre" name="titre" required value="<?php echo $quizzDatas['titre']; ?>"><br><br>
 
