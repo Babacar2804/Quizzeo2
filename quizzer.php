@@ -5,7 +5,7 @@ require 'classes.php';
 $db = new BDD();
 $quizz=new Quizzer($db);
 $user_id = $_SESSION['user_id'];
-$req=$quizz->affichquizz($user_id);
+$reqs=$quizz->affichquizz($user_id);
 
 ?>
 
@@ -28,8 +28,12 @@ $req=$quizz->affichquizz($user_id);
 
         <div class="bigcard">
             <div class="card">
-                <h1>Liste des quizzes</h1><?php echo $req;  ?>
-                <!-- Crééer un quizz -->
+                <h2>Liste des quizzes</h2>
+                <?php foreach ($reqs as $req): ?>
+                        <li>
+                            <?= $req['titre'] ?> 
+                        </li>
+                    <?php endforeach; ?>         
             </div>
 
             <div class="card">
