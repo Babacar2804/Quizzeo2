@@ -119,7 +119,7 @@ if (!empty ($error)) {
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
-    <script src="app4.js"></script>
+    <script src="app.js"></script>
     <script src="script.js"></script>
 </body>
 
