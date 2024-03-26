@@ -77,7 +77,7 @@ class Quizzer extends Users {
        $result= $this->executeInsertQuery("INSERT INTO Questions (question, id_quizz) VALUES (:question, :id_quizz)", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
     }
-    
+   
     public function insert_reponse($reponses, $id_question) {
         $params = [
             ':reponses' => htmlspecialchars($reponses),
@@ -86,6 +86,12 @@ class Quizzer extends Users {
     
         $result= $this->executeInsertQuery("INSERT INTO Reponses (reponses, id_question) VALUES (:reponses, :id_question)", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
+    }
+    public function affichquizz($user_id) {
+        $query = "SELECT titre FROM quizzes WHERE id_user= ::user_id";
+        $params = array(':user_id' => $user_id);
+        $statement = $this->db->executeQuery($query, $params);
+        return $statement !== false;
     }
     public function saveQuizLink($id_quizz, $lien) {
         $params = [
