@@ -88,10 +88,11 @@ class Quizzer extends Users {
         return $result ? $this->db->connection->lastInsertId() : false;
     }
     public function affichquizz($user_id) {
-        $query = "SELECT titre FROM quizzes WHERE id_user= ::user_id";
-        $params = array(':user_id' => $user_id);
-        $statement = $this->db->executeQuery($query, $params);
-        return $statement !== false;
+        $query = "SELECT titre FROM quizzes WHERE id_user= :user_id";
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute(array(':user_id' => $user_id));
+        $quizz = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $quizz;
     }
     public function saveQuizLink($id_quizz, $lien) {
         $params = [
