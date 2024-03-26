@@ -88,7 +88,7 @@ class Quizzer extends Users {
         return $result ? $this->db->connection->lastInsertId() : false;
     }
     public function affichquizz($user_id) {
-        $query = "SELECT titre FROM quizzes WHERE id_user= :user_id";
+        $query = "SELECT * FROM quizzes WHERE id_user= :user_id";
         $statement = $this->db->connection->prepare($query);
         $statement->execute(array(':user_id' => $user_id));
         $quizz = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -120,6 +120,16 @@ class Quizzer extends Users {
             $stmt->bindParam($key, $value, PDO::PARAM_STR);
         }
         return $stmt->execute();
+    }
+    public function updateQuizzStatus($quiz_id, $status) {
+        $query = "UPDATE quizzes SET statut_quizz = :status WHERE id_quizz = :quiz_id";
+        $params = array(':status' => $status, ':quiz_id' => $quiz_id);
+        $statement = $this->db->executeQuery($query, $params);
+        if ($statement) {
+            echo '<script>alert("Statut du quizz mis à jour avec succès.");</script>';
+        } else {
+            echo "<script>alert('Une erreur s\'est produite lors de la mise à jour du statut du quizz.');</script>";
+        }
     }
     
     
