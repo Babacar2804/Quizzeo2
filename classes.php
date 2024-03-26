@@ -54,17 +54,16 @@ class Quizzer extends Users {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
    
-    public function insert_quizz($id_user, $titre, $date_creation, $type, $description, $statut_quizz) {
+    public function insert_quizz($id_user, $titre, $date_creation, $type, $statut_quizz) {
         $params = [
             ':titre' => htmlspecialchars($titre),
             ':date_creation' => htmlspecialchars($date_creation),
             ':type' => htmlspecialchars($type),
-            ':description' => htmlspecialchars($description),
             ':statut_quizz' => htmlspecialchars($statut_quizz),
             ':id_user' => (int) $id_user
         ];
     
-        $result = $this->executeInsertQuery("INSERT INTO Quizzes (id_user,titre, date_creation,  type, Description, statut_quizz) VALUES (:id_user,:titre, :date_creation, :type, :description, :statut_quizz)", $params);
+        $result = $this->executeInsertQuery("INSERT INTO Quizzes (id_user,titre, date_creation,  type, statut_quizz) VALUES (:id_user,:titre, :date_creation, :type, :description, :statut_quizz)", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
     }
     
@@ -77,7 +76,16 @@ class Quizzer extends Users {
        $result= $this->executeInsertQuery("INSERT INTO Questions (question, id_quizz) VALUES (:question, :id_quizz)", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
     }
-   
+    public function updateQuizz($titre,$date_creation,$type){
+    $updateQuizzQuery = "UPDATE quizz SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
+    $params= [
+        ':titre' => $titre,
+        ':date_creation' => $date_creation,
+        ':typeQuizz' => $type,
+    ];
+    $result= $this->executeInsertQuery($updateQuizzQuery,$params);
+    $stmt = $this->db->connection->prepare($updateQuizzQuery);
+    }
     public function insert_reponse($reponses, $id_question) {
         $params = [
             ':reponses' => htmlspecialchars($reponses),
@@ -88,7 +96,7 @@ class Quizzer extends Users {
         return $result ? $this->db->connection->lastInsertId() : false;
     }
     public function affichquizz($user_id) {
-        $query = "SELECT titre FROM quizzes WHERE id_user= :user_id";
+        $query = "SELECT * FROM quizzes WHERE id_user= :user_id";
         $statement = $this->db->connection->prepare($query);
         $statement->execute(array(':user_id' => $user_id));
         $quizz = $statement->fetchAll(PDO::FETCH_ASSOC);

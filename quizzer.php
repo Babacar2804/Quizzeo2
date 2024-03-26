@@ -32,6 +32,10 @@ $reqs=$quizz->affichquizz($user_id);
                 <?php foreach ($reqs as $req): ?>
                         <li>
                             <?= $req['titre'] ?> 
+                            <a href="edit_quizz.php?id_quizz=<?php echo $req['id_quizz']; ?>"><button>Modifier</button></a>
+                            <button <?php echo $req['id_quizz']; ?>>Lancer</button></a>
+                            <input type="text" id="lienGenere" name="lienGenere" value="<?php echo $lien; ?>" readonly><br><br>
+                            <button <?php echo $req['id_quizz']; ?>>Terminer</button></a>
                         </li>
                     <?php endforeach; ?>         
             </div>

@@ -16,8 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $titre = $_POST["titre"];
     $date_creation = date('Y-m-d');
     $type = $_POST["typeQuizz"];
-    $description = $_POST["description"];
-    $statut_quizz = $_POST["statut_quizz"];
     
     // Récupération des questions et des réponses
     $questions = $_POST["questions"];
@@ -79,16 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <label for="titre">Titre du Quizz :</label><br>
     <input type="text" id="titre" name="titre" required><br><br>
 
-    <label for="description">Description :</label><br>
-    <textarea id="description" name="description" rows="4" required></textarea><br><br>
-
-    <label for="statut_quizz">Statut du quizz :</label><br>
-    <select id="statut_quizz" name="statut_quizz" required>
-        <option value="creation">Création</option>
-        <option value="lance">Lancé</option>
-        <option value="termine">Terminé</option>
-    </select><br><br>
-
     <div id="questionsContainer">
         <!-- Les champs de question et de réponse seront ajoutés ici -->
     </div>
@@ -97,8 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <button type="button" id="SondageButton" onclick="showSondage()">Ajouter un Sondage</button>
     <br><br>
     <input type="submit" name="submit" value="Ajouter le Quizz">
-    <label for="lienGenere">Lien du Quizz :</label><br>
-    <input type="text" id="lienGenere" name="lienGenere" value="<?php echo $lien; ?>" readonly><br><br>
+    
 </form>
 
 </body>
