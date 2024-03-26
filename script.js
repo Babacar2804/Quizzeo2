@@ -27,15 +27,35 @@ function generateRandomPassword(length = 8) {
 
 function showQCM() {
     document.getElementById('QuizzInput').value = 'qcm';
+    
+    const sondageButton = document.getElementById('SondageButton');
+    sondageButton.disabled = true;
+    sondageButton.removeAttribute('onclick'); // Supprimer l'attribut onclick
+
+    const qcmButton = document.getElementById('QCMButton');
+    qcmButton.disabled = false;
+    qcmButton.setAttribute('onclick', 'showQCM()'); // Réactiver l'attribut onclick
+
     const questionDiv = createQuestionDiv('qcm');
     document.getElementById('questionsContainer').appendChild(questionDiv);
 }
 
 function showSondage() {
     document.getElementById('QuizzInput').value = 'sondage';
+    
+    const qcmButton = document.getElementById('QCMButton');
+    qcmButton.disabled = true;
+    qcmButton.removeAttribute('onclick'); // Supprimer l'attribut onclick
+
+    const sondageButton = document.getElementById('SondageButton');
+    sondageButton.disabled = false;
+    sondageButton.setAttribute('onclick', 'showSondage()'); // Réactiver l'attribut onclick
+
     const questionDiv = createQuestionDiv('sondage');
     document.getElementById('questionsContainer').appendChild(questionDiv);
 }
+
+
 let questionIndex=0;
 function createQuestionDiv(type) {
     questionIndex++;
