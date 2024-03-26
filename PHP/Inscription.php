@@ -49,7 +49,7 @@ if (isset($_POST['captcha'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INSCRIPTION</title>
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body data-barba="wrapper">
 <?php include 'nav.php'; ?>
@@ -84,7 +84,7 @@ if (isset($_POST['captcha'])) {
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
-    <script src="app.js"></script>
+    <script src="../js/app.js"></script>
 </body>
 
 </html>

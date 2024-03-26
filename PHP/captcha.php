@@ -18,7 +18,7 @@ for ($i = 0; $i < 5; $i++) {
 }
 
 // Utilisation d'une police de caractères différente
-$font = 'fonts\28 Days Later.ttf';
+$font = '../img/fonts/28 Days Later.ttf';
 
 // Dessiner le texte avec une rotation et une inclinaison aléatoires
 $angle = rand(-5, 5);

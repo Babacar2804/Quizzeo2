@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Title</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
 <body data-barba="wrapper">
@@ -36,8 +36,8 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
-    <script src="app.js"></script>
-    <script src="script.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/script.js"></script>
 </body>
 
 </html>
