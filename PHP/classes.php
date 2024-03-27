@@ -80,7 +80,7 @@ class Quizzer extends Users {
         return $statement ? $this->db->connection->lastInsertId() : false;
     }
     public function updateQuizz($titre, $date_creation, $type, $id_quizz) {
-        $query= "UPDATE quizzes SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
+        $query = "UPDATE quizzes SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
         $params = [
             ':titre' => $titre,
             ':date_creation' => $date_creation,
@@ -88,9 +88,9 @@ class Quizzer extends Users {
             ':id_quizz' => $id_quizz
         ];
         $statement = $this->db->connection->prepare($query);
-        $result=$statement->execute($params);
-        return $result ? $result->rowCount() : false;
+        return $statement->execute($params);
     }
+    
     public function insert_reponse($reponses, $id_question) {
         $query="INSERT INTO Reponses (reponses, id_question) VALUES (:reponses, :id_question)";
         $params = [
