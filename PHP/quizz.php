@@ -10,7 +10,6 @@ $db = new BDD();
 // }
 if (isset($_GET['id_quizz'])) {
     $id_quizz = $_GET['id_quizz'];
-    echo "ID du quiz récupéré depuis l'URL : " . $id_quizz . "<br>";  // Afficher l'ID du quiz pour vérification
     
     // Récupérer les questions pour ce quizz
     $query = "SELECT * FROM questions WHERE id_quizz = :id_quizz";
@@ -19,22 +18,27 @@ if (isset($_GET['id_quizz'])) {
         die("Erreur lors de l'exécution de la requête : " . $statement->errorInfo()[2]);
     }
     $questions = $statement->fetchAll(PDO::FETCH_ASSOC);
-    echo "Nombre de questions récupérées : " . count($questions) . "<br>";
 }else{
     echo "id quizz non trouvé dans l'url";
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Title</title>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body>
-<h1>Quizz</h1>
-<form action="score.php?id_quizz=<?php $id_quizz; ?>"  method="post">
+
+<body data-barba="wrapper">
+    <?php include 'nav.php'; ?>
+
+    <div class="pages" data-barba="container" data-barba-namespace="home">
+        <h1><span></span><span></span><span></span><span></span><span></span> Quizz</h1>
+        <!-- Mettre dans les span les lettres du mot de la page pour l'effet d'apparition -->
+        <form action="score.php?id_quizz=<?php echo $id_quizz; ?>"  method="post">
 <?php
 
 if (isset($questions) && !empty($questions)) {
@@ -61,5 +65,13 @@ if (isset($questions) && !empty($questions)) {
 
 ?>
 </form>
+
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>

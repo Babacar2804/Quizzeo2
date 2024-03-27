@@ -125,18 +125,25 @@ class Quizzer extends Users {
         $stmt->execute($params);
         return $stmt;
     }
-    public function insert_reponse_user($id_user, $id_question, $id_reponse, $score) {
-        $query="INSERT INTO Reponse_user (id_user, id_question, id_reponse, score) VALUES (:id_user, :id_question, :id_reponse, :score)";
-        $params = [
-            ':id_user' => (int) $id_user,
-            ':id_question' => (int) $id_question,
-            ':id_reponse' => (int) $id_reponse,
-            ':score' => (int)$score
-        ];
+    public function insert_reponse_user($id_user, $id_question, $id_reponse) {
+        // Vérifiez si la réponse est correcte
+        $query = "SELECT * FROM reponses WHERE id_question = :id_question AND id_reponse = :id_reponse";
         $statement = $this->db->connection->prepare($query);
-        $statement->execute($params);
-        return $statement;
+        $statement->execute(array(':id_question' => $id_question, ':id_reponse' => $id_reponse));
+        $reponse = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        $is_correct = ($reponse !== false) ? true : false;
+    
+        // Insérez la réponse de l'utilisateur
+        $query = "INSERT INTO reponse_user (id_user, id_question, id_reponse, is_correct) VALUES (:id_user, :id_question, :id_reponse, :is_correct)";
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute(array(':id_user' => $id_user, ':id_question' => $id_question, ':id_reponse' => $id_reponse, ':is_correct' => $is_correct));
+    
+        return $is_correct;
     }
+    
+    
+    
     
     
     public function updateQuizzStatus($quiz_id, $status) {

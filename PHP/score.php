@@ -1,37 +1,44 @@
 <?php 
 session_start();
 include 'classes.php';
-
+var_dump($_SESSION);
 $db = new BDD();
 $quizzer = new Quizzer($db);
-$id_user = $_SESSION['user_id'];
+$id_user = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($id_user && $_SERVER["REQUEST_METHOD"] == "POST") {
     $score = 0;
     
     foreach ($_POST as $key => $value) {
-        if (strpos($key, 'reponse_') !== false) {  // Vérifier si la clé correspond à une réponse
-            $id_question = str_replace('reponse_', '', $key);  // Récupérer l'ID de la question à partir de la clé
-            $id_reponse = $value;  // Récupérer l'ID de la réponse sélectionnée
+        if (strpos($key, 'reponse_') !== false) {
+            $id_question = str_replace('reponse_', '', $key);
+            $id_reponse = $value;
 
-            // Récupérer la première réponse pour cette question (la bonne réponse)
-            $query = "SELECT * FROM reponses WHERE id_question = :id_question ORDER BY id_reponse ASC LIMIT 1";
+            // Vérifiez si c'est la première réponse correcte
+            $query = "SELECT * FROM reponse_user WHERE id_user = :id_user AND id_question = :id_question";
             $statement = $db->connection->prepare($query);
-            $statement->execute(array(':id_question' => $id_question));
-            $reponse = $statement->fetch(PDO::FETCH_ASSOC);
+            $statement->execute(array(':id_user' => $id_user, ':id_question' => $id_question));
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
 
-            $quizzer->insert_reponse_user($id_user, $id_question, $id_reponse, $score);
+            if (!$result) {
+                $is_correct = $quizzer->insert_reponse_user($id_user, $id_question, $id_reponse);
+            } else {
+                $is_correct = $result['is_correct'];
+            }
 
-            if ($reponse && $reponse['id_reponse'] == $id_reponse) {
-                $score++;  // Incrémenter le score si la réponse sélectionnée est la bonne réponse
+            if ($is_correct) {
+                $score++;
             }
         }
     }
-
+    // Affichez le score
     echo "Votre score est de : " . $score . " sur " . count($_POST) . " questions.";
 } else {
     echo "erreur";
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
