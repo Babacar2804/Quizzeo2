@@ -71,11 +71,11 @@ if (isset($_GET['id_quizz'])) {
             <br><br>
         </div>
     <?php endforeach; ?>
-
+    <input type="hidden" id="QuizzInput" name="typeQuizz" value="">
     <!-- Ajouter une nouvelle question -->
     <button type="button" onclick="ajouterQuestion()">Ajouter une question</button>
     
-    <input type="hidden" id="QuizzInput" name="typeQuizz" value="">
+    
     <br><br>
     <input type="submit" name="submit" value="Modifier le Quizz">
 </form>
