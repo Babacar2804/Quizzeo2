@@ -32,19 +32,17 @@ $reponse_users = $statement->fetchAll(PDO::FETCH_ASSOC);
 // }
 
 // Afficher les scores de tous les utilisateurs pour le quiz spécifique
-$query = "SELECT ru.id_user, SUM(case when ru.score = 1 then 1 else 0 end) as score 
-    FROM reponse_user ru 
-    INNER JOIN questions q ON ru.id_question = q.id_question 
-    WHERE q.id_quizz = :id_quizz 
-    GROUP BY ru.id_user";
+$query = "SELECT ru.id_user, u.pseudo, SUM(case when ru.score = 1 then 1 else 0 end) as score 
+FROM reponse_user ru 
+INNER JOIN questions q ON ru.id_question = q.id_question 
+INNER JOIN users u ON ru.id_user = u.id_user 
+WHERE q.id_quizz = :id_quizz 
+GROUP BY ru.id_user";
 
 $statement = $db->connection->prepare($query);
 $statement->execute(array(':id_quizz' => $quiz_id));
 $scores = $statement->fetchAll(PDO::FETCH_ASSOC);
-$query="SELECT pseudo from users where :id_quizz=:id_quizz";
-$statement = $db->connection->prepare($query);
-$statement->execute(array(':id_quizz' => $quiz_id));
-$users = $statement->fetchAll(PDO::FETCH_ASSOC);    
+  
     }
 }
 
@@ -112,17 +110,14 @@ function generateUniqueLink($quiz_id)
             </div>
 
             <div class="card">
-                <!-- Liste des réponses -->
-                <?php if (isset($scores)) {
-                foreach ($scores as $score) {
-                    if(isset($users[$score['id_user']])){
-                echo "Utilisateur ID : " . $users[$score['id_user']] . " - Score : " . $score['score'] . "<br>";
-                }
-            }
-            } else {
-            echo "Aucun score disponible.";
-            }             ?>
-               
+            <!-- Liste des scores -->
+             <?php if (isset($scores) && !empty($scores)) : ?>
+             <?php foreach ($scores as $score) : ?>
+            <p>Utilisateur : <?= $score['pseudo'] ?> - Score : <?= $score['score'] ?></p>
+            <?php endforeach; ?>
+            <?php else : ?>
+            <p>Aucun score disponible.</p>
+            <?php endif; ?>
             </div>
         </div>
     </div>
