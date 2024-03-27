@@ -17,13 +17,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $quiz_id = $_POST['quiz_id'];
         $quizz->deleteQuizLink($quiz_id);
         $quizz->updateQuizzStatus($quiz_id, 'termine');
+        // Insérer les réponses de tous les utilisateurs dans la table reponse_users
+    $query = "SELECT ru.id_user, q.id_quizz, ru.id_question, ru.id_reponse 
+    FROM reponse_user ru 
+    INNER JOIN questions q ON ru.id_question = q.id_question 
+    WHERE q.id_quizz = :id_quizz";
+
+$statement = $db->connection->prepare($query);
+$statement->execute(array(':id_quizz' => $quiz_id));
+$reponse_users = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+// foreach ($reponse_users as $reponse_user) {
+// echo "Utilisateur ID : " . $reponse_user['id_user'] . " - Quiz ID : " . $reponse_user['id_quizz'] . " - Question ID : " . $reponse_user['id_question'] . " - Réponse ID : " . $reponse_user['id_reponse'] . "<br>";
+// }
+
+// Afficher les scores de tous les utilisateurs pour le quiz spécifique
+$query = "SELECT ru.id_user, SUM(case when ru.score = 1 then 1 else 0 end) as score 
+    FROM reponse_user ru 
+    INNER JOIN questions q ON ru.id_question = q.id_question 
+    WHERE q.id_quizz = :id_quizz 
+    GROUP BY ru.id_user";
+
+$statement = $db->connection->prepare($query);
+$statement->execute(array(':id_quizz' => $quiz_id));
+$scores = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    
     }
 }
 
-function generateUniqueLink($id_quizz)
+function generateUniqueLink($quiz_id)
 {
     $caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    $lien = 'http://localhost/Projet%20Web/Quizzeo2/php/quizz.php?' . "id_quizz=" . $id_quizz . '/';
+    $lien = 'http://localhost/Projet%20Web/Quizzeo2/php/quizz.php?' . "id_quizz=" . $quiz_id . '/';
     for ($i = 0; $i < 10; $i++) {
         $lien .= $caracteres[rand(0, strlen($caracteres) - 1)];
     }
@@ -85,6 +111,9 @@ function generateUniqueLink($id_quizz)
 
             <div class="card">
                 <!-- Liste des réponses -->
+                <?php foreach ($scores as $score) {
+            echo "Utilisateur ID : " . $score['id_user'] . " - Score : " . $score['score'] . "<br>";
+                } ?>
             </div>
         </div>
     </div>
