@@ -48,6 +48,7 @@ if (isset ($_GET['id_quizz'])) {
 </head>
 
 <body>
+
     <body data-barba="wrapper">
         <?php include 'nav.php'; ?>
 
@@ -95,14 +96,14 @@ if (isset ($_GET['id_quizz'])) {
                         <br><br>
                         <input type="submit" name="submit" value="Modifier le Quizz">
 
-            </form>
-            </div>
+                    </form>
+                </div>
             </div>
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://unpkg.com/@barba/core"></script>
-    <script src="../js/app.js"></script>
-    <script src="../js/script.js"></script>
+            <script src="https://unpkg.com/@barba/core"></script>
+            <script src="../js/app.js"></script>
+            <script src="../js/script.js"></script>
     </body>
 
 </html>
