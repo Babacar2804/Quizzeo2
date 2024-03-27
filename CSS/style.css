@@ -54,7 +54,7 @@ body {
 
 h1 {
   font-family: "Dela Gothic One", sans-serif;
-  font-size: 80px;
+  font-size: 60px;
 }
 h2 {
   font-family: "Dela Gothic One", sans-serif;
@@ -157,8 +157,8 @@ form .txt_field {
 }
 
 input[type="Submit"] {
-  width: 80%;
-  height: 50px;
+  width: 70%;
+  height: 45px;
   border: 1px solid;
   border-radius: 25px;
   font-size: 18px;
@@ -233,6 +233,54 @@ input[type="Submit"]:hover {
   justify-content: space-evenly;
   width: 80%;
 }
+.card1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: 0 20px 20px 20px;
+  background-color: #333;
+  color: #f2f2f2;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+.card1 form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card1 h2 {
+  margin-bottom: 10px;
+}
+
+.card1 label {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+.card1 input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.card1 button {
+  width: 50%;
+  padding: 5px 10px;
+  background-color: #b98c36;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
 
 .bigcard .card {
   flex: 0 0 calc(33.33% - 50px);
@@ -259,12 +307,12 @@ input[type="Submit"]:hover {
   margin-bottom: 10px;
 }
 
-.card button, input[type="submit"] {
+.card button {
   background-color: #b98c36;
   color: #f2f2f2;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 5px 15px;
   font-size: 16px;
   cursor: pointer;
 }

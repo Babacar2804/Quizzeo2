@@ -72,8 +72,8 @@ function generateUniqueLink($quiz_id)
 
     <div class="pages" data-barba="container" data-barba-namespace="home">
         <h1>
-            <span>Q</span><span>U</span><span>I</span><span>Z</span><span>Z</span><span>E</span><span>R</span> Dashboard
-        </h1>
+            <span>Q</span><span>u</span><span>i</span><span>z</span><span>z</span><span>e</span><span>r</span> Dashboard
+        </h1><br>
 
         <div class="bigcard">
             <div class="card">

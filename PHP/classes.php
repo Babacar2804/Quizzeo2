@@ -191,6 +191,19 @@ class Quizzer extends Users {
 }
 
 class AdminQuiz extends Quizzer {
+
+public function updateQuizStatus($quiz_id, $status) {
+    $statut_quizz = ($status === "active") ? 1 : 0;
+    $query = "UPDATE quizzes SET statut_quizz = :statut_quizz WHERE id_quizz = :quiz_id";
+    $params = array(':statut_quizz' => $statut_quizz, ':quiz_id' => $quiz_id);
+    $statement = $this->db->executeQuery($query, $params);
+    if ($statement) {
+        echo "Statut du quiz mis à jour avec succès.";
+    } else {
+        echo "Une erreur s'est produite lors de la mise à jour du statut du quiz.";
+    }
+}
+
 }
 
 class ValCompte extends AdminQuiz {
