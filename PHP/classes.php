@@ -110,6 +110,13 @@ class Quizzer extends Users {
         $result = $this->executeInsertQuery("UPDATE Quizzes SET lien = :lien WHERE id_quizz = :id_quizz", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
     }
+    public function deleteQuizLink($quiz_id) {
+        $query = "UPDATE quizzes SET lien = NULL WHERE id_quizz = :id_quizz";
+        $params = array(':id_quizz' => $quiz_id);
+        $stmt = $this->db->connection->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     public function insert_reponse_user($id_user, $id_question, $id_reponse, $statut_rep) {
         $params = [
             ':id_user' => (int) $id_user,

@@ -15,7 +15,7 @@
             <?php
             if (isset($_SESSION['user_id'])) {
                 echo '<li class="navbar-link"><a href="deconnexion.php">Déconnexion</a></li>';
-                echo '<li class="navbar-link"><a href="votre_compte.php">Votre Compte</a></li>';
+                echo '<li class="navbar-link"><a href="compte.php">Votre Compte</a></li>';
             } else {
                 echo '<li class="navbar-link"><a href="inscription.php">Inscription</a></li>';
                 echo '<li class="navbar-link"><a href="connexion.php">Connexion</a></li>';
