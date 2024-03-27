@@ -47,14 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <li>
                         <h3><?= $req['titre'] ?></h3>
                             <h5>Type: <?= $req['type'] ?></h5>
-                            <form method="post">
-                                <input type="hidden" name="quiz_id" value="<?= $req['id_quizz'] ?>">
-                                <button type="submit" name="creation">
-                                    <a href="editquizz.php?id=<?= $req['id_quizz'] ?>">Modifier</a>
-                                </button>
+                                <input type="hidden" name="quiz_id" value="<?= $req['id_quizz'] ?>"/>
+                                <a href="editquizz.php?id_quizz=<?= $req['id_quizz'] ?>"><button name="creation">Modifier</button></a>
                                 <button type="submit" name="lance">Lancer</button>
                                 <button type="submit" name="termine">Terminer</button>
-                            </form>
                         </li>
                     <?php endforeach; ?>
                 </ul>
