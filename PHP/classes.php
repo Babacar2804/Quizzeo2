@@ -194,11 +194,11 @@ class AdminQuiz extends Quizzer {
 
 public function updateQuizStatus($quiz_id, $status) {
     $statut_quizz = ($status === "active") ? 1 : 0;
-    $query = "UPDATE quizzes SET statut_quizz = :statut_quizz WHERE id_quizz = :quiz_id";
-    $params = array(':statut_quizz' => $statut_quizz, ':quiz_id' => $quiz_id);
+    $query = "UPDATE quizzes SET status = :status WHERE id_quizz = :quiz_id";
+    $params = array(':status' => $statut_quizz, ':quiz_id' => $quiz_id);
     $statement = $this->db->executeQuery($query, $params);
     if ($statement) {
-        echo "Statut du quiz mis à jour avec succès.";
+        echo '<script>alert("Statut du quizz mis à jour avec succès.");</script>';
     } else {
         echo "Une erreur s'est produite lors de la mise à jour du statut du quiz.";
     }
@@ -253,7 +253,7 @@ class AdminSite extends ValCompte {
         $params = array(':status' => $status_value, ':user_id' => $user_id);
         $statement = $this->db->executeQuery($query, $params);
         if ($statement) {
-            echo "Statut de connexion de l'utilisateur mis à jour avec succès.";
+            echo '<script>alert("Statut du user mis à jour avec succès.");</script>';
         } else {
             echo "Une erreur s'est produite lors de la mise à jour du statut de connexion de l'utilisateur.";
         }
@@ -265,7 +265,7 @@ class AdminSite extends ValCompte {
         $params = array(':statut_compte' => $statut_compte, ':user_id' => $user_id);
         $statement = $this->db->executeQuery($query, $params);
         if ($statement) {
-            echo "Statut du compte utilisateur mis à jour avec succès.";
+            echo '<script>alert("Statut du quizz mis à jour avec succès.");</script>';
         } else {
             echo "Une erreur s'est produite lors de la mise à jour du statut du compte utilisateur.";
         }

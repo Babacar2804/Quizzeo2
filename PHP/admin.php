@@ -4,10 +4,12 @@ include 'classes.php';
 $db = new BDD();
 $adminSite = new AdminSite($db);
 $users = new AdminSite($db);
+$adminQuiz = new AdminQuiz($db);
+
 
 $password = '';
 
-if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_role']) || $_SESSION['user_role'] != 1) {
+if (!isset ($_SESSION['user_id']) || !isset ($_SESSION['user_role']) || $_SESSION['user_role'] != 1) {
     header("Location: 403.php");
     exit();
 }
@@ -44,10 +46,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset ($_POST["submit"])) {
         }
     }
 }
-if (!empty ($error)) {
-    echo "<script>alert('$error');</script>";
-}
+if (isset ($_POST['update_status'])) {
+    $quiz_id = $_POST['quiz_id'];
+    $status = $_POST['status'];
 
+    // Récupération du statut actuel du quiz
+    $quiz = $adminQuiz->getQuizzData($quiz_id);
+    $current_status = $quiz['status'];
+
+    if ($status == 'inactive') {
+        $adminQuiz->updateQuizStatus($quiz_id, $status);
+    } else {
+        $status == 'active';
+        $adminQuiz->updateQuizStatus($quiz_id, $status);
+    }
+}
+$quizzes = $adminQuiz->Quizzes();
 $listeUtilisateurs = $adminSite->Users();
 $utilisateursCo = $adminSite->getUsersByStatus(1);
 $listeQuizzes = $adminSite->Quizzes();
@@ -65,7 +79,7 @@ $listeQuizzes = $adminSite->Quizzes();
 </head>
 
 <body data-barba="wrapper">
-<?php include 'nav.php'; ?>
+    <?php include 'nav.php'; ?>
 
     <div class="pages" data-barba="container" data-barba-namespace="home">
         <h1><span>A</span><span>d</span><span>m</span><span>i</span><span>n</span> Dashboard</h1>
@@ -74,17 +88,19 @@ $listeQuizzes = $adminSite->Quizzes();
                 <h2>Liste des utilisateurs créés :</h2><br>
                 <ul>
                     <?php foreach ($listeUtilisateurs as $utilisateur): ?>
-                        <li>
-                            <?= $utilisateur['pseudo'] ?> -
-                            <?= $utilisateur['email'] ?>
-                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                <input type="hidden" name="user_id" value="<?= $utilisateur['id_user'] ?>">
-                                <button type="submit" name="status"
-                                    value="<?= $utilisateur['statut_compte'] ? 'inactive' : 'active' ?>">
-                                    <?= $utilisateur['statut_compte'] ? 'Désactiver' : 'Activer' ?>
-                                </button><br>
-                            </form>
-                        </li>
+                        <?php if ($utilisateur['id_user'] != $_SESSION['user_id']): ?>
+                            <li>
+                                <?= $utilisateur['pseudo'] ?> -
+                                <?= $utilisateur['email'] ?>
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                    <input type="hidden" name="user_id" value="<?= $utilisateur['id_user'] ?>">
+                                    <button type="submit" name="status"
+                                        value="<?= $utilisateur['statut_compte'] ? 'inactive' : 'active' ?>">
+                                        <?= $utilisateur['statut_compte'] ? 'Désactiver' : 'Activer' ?>
+                                    </button><br>
+                                </form>
+                            </li>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -104,7 +120,8 @@ $listeQuizzes = $adminSite->Quizzes();
                 <h2>Créer un compte</h2><br>
                 <button onclick="showForm()">Cliquer ici</button><br>
                 <div id="creationForm" style="display: none;">
-                <br><form id="userCreationForm" method="post"
+                    <br>
+                    <form id="userCreationForm" method="post"
                         action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <label for="pseudo">Pseudo:</label>
                         <input type="text" id="pseudo" name="pseudo" required><br><br>
@@ -124,7 +141,32 @@ $listeQuizzes = $adminSite->Quizzes();
                     </form>
                 </div>
             </div>
+            <div class="card">
+                <?php foreach ($quizzes as $quiz): ?>
+
+                    <h3>
+                        <?php echo $quiz['titre']; ?>
+                    </h3>
+                    <p>Statut :
+                        <?php echo ($quiz['status'] == 1) ? "Actif" : "Inactif"; ?>
+                    </p>
+                    <form method="post">
+                        <input type="hidden" name="quiz_id" value="<?php echo $quiz['id_quizz']; ?>">
+                        <label for="status">Changer le statut :</label><br>
+                        <select name="status">
+                            <option value="active" <?php echo ($quiz['status'] == 1) ? 'disabled' : ''; ?>>
+                                Activer
+                            </option>
+                            <option value="inactive">Désactiver</option>
+                        </select>
+                        <button type="submit" name="update_status">Mettre à jour</button>
+                    </form>
+
+                <?php endforeach; ?>
+
+            </div>
         </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>

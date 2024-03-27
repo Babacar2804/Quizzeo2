@@ -17,14 +17,12 @@ if (isset ($_POST['update_status'])) {
 
     // Récupération du statut actuel du quiz
     $quiz = $adminQuiz->getQuizzData($quiz_id);
-    $current_status = $quiz['statut_quizz'];
+    $current_status = $quiz['status'];
 
-    // Vérification si l'administrateur a le droit de désactiver le quiz
     if ($status == 'inactive') {
-        // Mise à jour du statut seulement si le statut actuel est "actif" et la nouvelle action est "inactive"
         $adminQuiz->updateQuizStatus($quiz_id, $status);
     } else {
-        echo "Vous n'avez pas le droit de réactiver un quiz inactif.";
+        echo "<script>alert('Vous n\'avez pas le droit de réactiver un quiz inactif.');</script>";
     }
 }
 
@@ -59,13 +57,13 @@ $quizzes = $adminQuiz->Quizzes();
                                 <?php echo $quiz['titre']; ?>
                             </h3>
                             <p>Statut :
-                                <?php echo ($quiz['statut_quizz'] == 1) ? "Actif" : "Inactif"; ?>
+                                <?php echo ($quiz['status'] == 1) ? "Actif" : "Inactif"; ?>
                             </p>
                             <form method="post">
                                 <input type="hidden" name="quiz_id" value="<?php echo $quiz['id_quizz']; ?>">
-                                <label for="status">Changer le statut :</label><br><br>
+                                <label for="status">Changer le statut :</label><br>
                                 <select name="status">
-                                    <option value="active" <?php echo ($quiz['statut_quizz'] == 1) ? 'disabled' : ''; ?>>
+                                    <option value="active" <?php echo ($quiz['status'] == 1) ? 'disabled' : ''; ?>>
                                         Activer
                                     </option>
                                     <option value="inactive">Désactiver</option>
