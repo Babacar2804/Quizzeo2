@@ -75,15 +75,16 @@ class Quizzer extends Users {
        $result= $this->executeInsertQuery("INSERT INTO Questions (question, id_quizz) VALUES (:question, :id_quizz)", $params);
         return $result ? $this->db->connection->lastInsertId() : false;
     }
-    public function updateQuizz($titre,$date_creation,$type){
-    $updateQuizzQuery = "UPDATE quizz SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
-    $params= [
-        ':titre' => $titre,
-        ':date_creation' => $date_creation,
-        ':typeQuizz' => $type,
-    ];
-    $result= $this->executeInsertQuery($updateQuizzQuery,$params);
-    $stmt = $this->db->connection->prepare($updateQuizzQuery);
+    public function updateQuizz($titre, $date_creation, $type, $id_quizz) {
+        $updateQuizzQuery = "UPDATE quizzes SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
+        $params = [
+            ':titre' => $titre,
+            ':date_creation' => $date_creation,
+            ':type' => $type,
+            ':id_quizz' => $id_quizz
+        ];
+        $result = $this->db->executeQuery($updateQuizzQuery, $params);
+        return $result ? $result->rowCount() : false;
     }
     public function insert_reponse($reponses, $id_question) {
         $params = [

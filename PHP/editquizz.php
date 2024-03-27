@@ -15,7 +15,7 @@ if (isset($_GET['id_quizz'])) {
         $date_creation = date('Y-m-d');
         $type = $_POST['typeQuizz'];
 
-        $quizzer->updateQuizz($titre, $date_creation, $type);
+        $quizzer->updateQuizz($titre, $date_creation, $type, $id_quizz);
         $quizzer->deleteQuestions($id_quizz);
 
         // Insérer les nouvelles questions et réponses
@@ -32,6 +32,7 @@ if (isset($_GET['id_quizz'])) {
                 break;
             }
         }
+        header("Location: quizzer.php");
     }
 }
 
@@ -46,7 +47,7 @@ if (isset($_GET['id_quizz'])) {
 </head>
 <body>
 <h1>Modifier Quizz</h1><br>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?id_quizz=' . $id_quizz; ?>" method="post">
     <label for="titre">Titre du Quizz :</label><br>
     <input type="text" id="titre" name="titre" required value="<?php echo $quizzDatas['titre']; ?>"><br><br>
 
