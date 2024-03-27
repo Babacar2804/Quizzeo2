@@ -48,7 +48,6 @@ if (isset ($_GET['id_quizz'])) {
 </head>
 
 <body>
-
     <body data-barba="wrapper">
         <?php include 'nav.php'; ?>
 

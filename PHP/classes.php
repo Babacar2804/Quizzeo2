@@ -55,87 +55,90 @@ class Quizzer extends Users {
     }
    
     public function insert_quizz($id_user, $titre, $date_creation, $type) {
+        $query="INSERT INTO Quizzes (id_user,titre, date_creation,  type, statut_quizz) VALUES (:id_user,:titre, :date_creation, :type, :statut_quizz)";
         $params = [
             ':titre' => htmlspecialchars($titre),
             ':date_creation' => htmlspecialchars($date_creation),
             ':type' => htmlspecialchars($type),
-            ':id_user' => (int) $id_user
+            ':id_user' => (int) $id_user,
+            ':statut_quizz'=>'creation'
         ];
-    
-        $result = $this->executeInsertQuery("INSERT INTO Quizzes (id_user,titre, date_creation,  type, statut_quizz) VALUES (:id_user,:titre, :date_creation, :type, :description, :statut_quizz)", $params);
-        return $result ? $this->db->connection->lastInsertId() : false;
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute($params);
+        return $statement ? $this->db->connection->lastInsertId() : false;
     }
     
     public function insert_question($question, $id_quizz) {
+        $query="INSERT INTO Questions (question, id_quizz) VALUES (:question, :id_quizz)";
         $params = [
             ':question' => htmlspecialchars($question),
             ':id_quizz' => (int) $id_quizz
         ];
     
-       $result= $this->executeInsertQuery("INSERT INTO Questions (question, id_quizz) VALUES (:question, :id_quizz)", $params);
-        return $result ? $this->db->connection->lastInsertId() : false;
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute($params);
+        return $statement ? $this->db->connection->lastInsertId() : false;
     }
     public function updateQuizz($titre, $date_creation, $type, $id_quizz) {
-        $updateQuizzQuery = "UPDATE quizzes SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
+        $query= "UPDATE quizzes SET titre = :titre, date_creation = :date_creation, type = :type WHERE id_quizz = :id_quizz";
         $params = [
             ':titre' => $titre,
             ':date_creation' => $date_creation,
             ':type' => $type,
             ':id_quizz' => $id_quizz
         ];
-        $result = $this->db->executeQuery($updateQuizzQuery, $params);
+        $statement = $this->db->connection->prepare($query);
+        $result=$statement->execute($params);
         return $result ? $result->rowCount() : false;
     }
     public function insert_reponse($reponses, $id_question) {
+        $query="INSERT INTO Reponses (reponses, id_question) VALUES (:reponses, :id_question)";
         $params = [
             ':reponses' => htmlspecialchars($reponses),
             ':id_question' => (int) $id_question
         ];
-    
-        $result= $this->executeInsertQuery("INSERT INTO Reponses (reponses, id_question) VALUES (:reponses, :id_question)", $params);
-        return $result ? $this->db->connection->lastInsertId() : false;
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute($params);
+        return $statement ? $this->db->connection->lastInsertId() : false;
     }
     public function affichquizz($user_id) {
         $query = "SELECT * FROM quizzes WHERE id_user= :user_id";
         $statement = $this->db->connection->prepare($query);
         $statement->execute(array(':user_id' => $user_id));
-        $quizz = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $quizz;
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
     public function saveQuizLink($id_quizz, $lien) {
+        $query="UPDATE Quizzes SET lien = :lien WHERE id_quizz = :id_quizz";
         $params = [
             ':id_quizz' => (int) $id_quizz,
             ':lien' => htmlspecialchars($lien)
         ];
 
-        $result = $this->executeInsertQuery("UPDATE Quizzes SET lien = :lien WHERE id_quizz = :id_quizz", $params);
-        return $result ? $this->db->connection->lastInsertId() : false;
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute($params);
+        return $statement ? $this->db->connection->lastInsertId() : false;
     }
     public function deleteQuizLink($quiz_id) {
         $query = "UPDATE quizzes SET lien = NULL WHERE id_quizz = :id_quizz";
         $params = array(':id_quizz' => $quiz_id);
         $stmt = $this->db->connection->prepare($query);
         $stmt->execute($params);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt;
     }
     public function insert_reponse_user($id_user, $id_question, $id_reponse, $statut_rep) {
+        $query="INSERT INTO Reponse_user (id_user, id_question, id_reponse, statut_rep) VALUES (:id_user, :id_question, :id_reponse, :statut_rep)";
         $params = [
             ':id_user' => (int) $id_user,
             ':id_question' => (int) $id_question,
             ':id_reponse' => (int) $id_reponse,
             ':statut_rep' => htmlspecialchars($statut_rep)
         ];
-    
-        return $this->executeInsertQuery("INSERT INTO Reponse_user (id_user, id_question, id_reponse, statut_rep) VALUES (:id_user, :id_question, :id_reponse, :statut_rep)", $params);
+        $statement = $this->db->connection->prepare($query);
+        $statement->execute($params);
+        return $statement;
     }
     
-    public function executeInsertQuery($query, $params) {
-        $stmt = $this->db->connection->prepare($query);
-        foreach ($params as $key => &$value) {
-            $stmt->bindParam($key, $value, PDO::PARAM_STR);
-        }
-        return $stmt->execute();
-    }
+    
     public function updateQuizzStatus($quiz_id, $status) {
         $query = "UPDATE quizzes SET statut_quizz = :status WHERE id_quizz = :quiz_id";
         $params = array(':status' => $status, ':quiz_id' => $quiz_id);
