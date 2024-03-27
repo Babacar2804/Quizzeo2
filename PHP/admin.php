@@ -71,7 +71,7 @@ $listeQuizzes = $adminSite->Quizzes();
         <h1><span>A</span><span>d</span><span>m</span><span>i</span><span>n</span> Dashboard</h1>
         <div class="bigcard">
             <div class="card">
-                <h2>Liste des utilisateurs créés :</h2>
+                <h2>Liste des utilisateurs créés :</h2><br>
                 <ul>
                     <?php foreach ($listeUtilisateurs as $utilisateur): ?>
                         <li>
@@ -82,7 +82,7 @@ $listeQuizzes = $adminSite->Quizzes();
                                 <button type="submit" name="status"
                                     value="<?= $utilisateur['statut_compte'] ? 'inactive' : 'active' ?>">
                                     <?= $utilisateur['statut_compte'] ? 'Désactiver' : 'Activer' ?>
-                                </button>
+                                </button><br>
                             </form>
                         </li>
                     <?php endforeach; ?>
@@ -90,7 +90,7 @@ $listeQuizzes = $adminSite->Quizzes();
             </div>
 
             <div class="card">
-                <h2>Utilisateurs connectés en ce moment :</h2>
+                <h2>Utilisateurs connectés en ce moment :</h2><br>
                 <ul>
                     <?php foreach ($utilisateursCo as $utilisateur): ?>
                         <li>
@@ -101,10 +101,10 @@ $listeQuizzes = $adminSite->Quizzes();
             </div>
 
             <div class="card">
-                <h2>Créer un compte</h2>
-                <button onclick="showForm()">Cliquer ici</button>
+                <h2>Créer un compte</h2><br>
+                <button onclick="showForm()">Cliquer ici</button><br>
                 <div id="creationForm" style="display: none;">
-                    <form id="userCreationForm" method="post"
+                <br><form id="userCreationForm" method="post"
                         action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                         <label for="pseudo">Pseudo:</label>
                         <input type="text" id="pseudo" name="pseudo" required><br><br>
