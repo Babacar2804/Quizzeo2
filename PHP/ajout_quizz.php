@@ -10,7 +10,6 @@ $quizzer=new Quizzer($db);
 $id_user = $_SESSION['user_id'];
 // Vérifiez si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-    var_dump($_POST);
     
     $titre = $_POST["titre"];
     $date_creation = date('Y-m-d');
@@ -52,17 +51,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Title</title>
     <script src="../js/script.js"></script>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body>
-<form action="" method="post">
-    <label for="titre">Titre du Quizz :</label><br>
-    <input type="text" id="titre" name="titre" required><br><br>
+
+<body data-barba="wrapper">
+    <?php include 'nav.php'; ?>
+
+    <div class="pages" data-barba="container" data-barba-namespace="home">
+        <h1><span></span><span></span><span></span><span></span><span></span> Ajout Du Quizz</h1>
+        <!-- Mettre dans les span les lettres du mot de la page pour l'effet d'apparition -->
+        <form action="" method="post">
+        <label for="titre">Titre du Quizz :</label><br>
+        <input type="text" id="titre" name="titre" required><br><br>
 
     <div id="questionsContainer">
         <!-- Les champs de question et de réponse seront ajoutés ici -->
@@ -75,5 +81,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     
 </form>
 
+        
+    </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://unpkg.com/@barba/core"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/script.js"></script>
 </body>
+
 </html>
