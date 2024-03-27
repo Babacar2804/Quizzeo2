@@ -3,8 +3,9 @@ session_start();
 include 'classes.php';
 
 $db = new BDD();
-$quizzer=new Quizzer($db);
-$id_user=$_SESSION['user_id'];
+$quizzer = new Quizzer($db);
+$id_user = $_SESSION['user_id'];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $score = 0;
     
@@ -18,7 +19,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $statement = $db->connection->prepare($query);
             $statement->execute(array(':id_question' => $id_question));
             $reponse = $statement->fetch(PDO::FETCH_ASSOC);
-            $quizzer->insert_reponse_user($id_user, $id_question, $id_reponse,'correcte');
+
+            $quizzer->insert_reponse_user($id_user, $id_question, $id_reponse, $score);
+
             if ($reponse && $reponse['id_reponse'] == $id_reponse) {
                 $score++;  // Incrémenter le score si la réponse sélectionnée est la bonne réponse
             }
@@ -27,6 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     echo "Votre score est de : " . $score . " sur " . count($_POST) . " questions.";
 } else {
-    header("location: index.php");  // Rediriger vers la page d'accueil si la méthode HTTP n'est pas POST
+    echo "erreur";
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>

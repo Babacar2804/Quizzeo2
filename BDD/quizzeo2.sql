@@ -1,13 +1,9 @@
-DROP Database if EXISTS quizzeo2;
-CREATE DATABASE quizzeo2;
-
-use quizzeo2;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 25, 2024 at 11:12 AM
+-- Generation Time: Mar 27, 2024 at 02:27 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -38,16 +34,16 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `id_quizz` int NOT NULL,
   PRIMARY KEY (`id_question`),
   KEY `questions_ibfk_1` (`id_quizz`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `questions`
 --
 
 INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
-(27, 'zscd', 20),
-(28, 'xqsx', 21),
-(29, 'efead&amp;e&quot;²', 22);
+(43, 'ssd', 34),
+(44, 'frrefe', 34),
+(45, 'efef', 35);
 
 -- --------------------------------------------------------
 
@@ -61,23 +57,22 @@ CREATE TABLE IF NOT EXISTS `quizzes` (
   `titre` varchar(50) DEFAULT NULL,
   `date_creation` date DEFAULT NULL,
   `type` enum('QCM','Sondage') NOT NULL,
-  `Description` varchar(120) DEFAULT NULL,
   `statut_quizz` enum('creation','lance','termine') NOT NULL,
-  `visi_res` tinyint NOT NULL,
   `id_user` int NOT NULL,
   `lien` varchar(100) NOT NULL,
+  `status` tinyint NOT NULL,
   PRIMARY KEY (`id_quizz`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `quizzes`
 --
 
-INSERT INTO `quizzes` (`id_quizz`, `titre`, `date_creation`, `type`, `Description`, `statut_quizz`, `visi_res`, `id_user`, `lien`) VALUES
-(20, 'Test', '2024-03-25', 'QCM', 'zsczsc', 'creation', 0, 26, ''),
-(21, 'xQ', '2024-03-25', 'QCM', 'xqxqx', 'creation', 0, 26, ''),
-(22, '&quot;rfef', '2024-03-25', 'QCM', '²frevfvz²²', 'creation', 0, 26, 'http://localhost/Projet%20Web/Quizzeo2/quizz.php/22/LiX5crT1eN');
+INSERT INTO `quizzes` (`id_quizz`, `titre`, `date_creation`, `type`, `statut_quizz`, `id_user`, `lien`, `status`) VALUES
+(31, 'Test', '2024-03-26', '', 'creation', 26, '', 0),
+(34, 'stive', '2024-03-27', 'QCM', 'termine', 26, '', 0),
+(35, 'zdf', '2024-03-27', 'Sondage', 'termine', 26, '', 0);
 
 -- --------------------------------------------------------
 
@@ -92,22 +87,22 @@ CREATE TABLE IF NOT EXISTS `reponses` (
   `id_question` int NOT NULL,
   PRIMARY KEY (`id_reponse`),
   KEY `reponses_ibfk_1` (`id_question`)
-) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `reponses`
 --
 
 INSERT INTO `reponses` (`id_reponse`, `reponses`, `id_question`) VALUES
-(50, 'dzcdc', 27),
-(51, 'dzscd;c', 27),
-(52, 'dc;scd;c', 27),
-(53, 'XQXQXS', 28),
-(54, 'xscsc', 28),
-(55, 'xscsc', 28),
-(56, 'efvrdv', 29),
-(57, 'edzefvzd', 29),
-(58, 'deafvedved', 29);
+(98, 'szdef', 43),
+(99, 'dzefefe', 43),
+(100, 'defefef', 43),
+(101, 'efedves', 44),
+(102, 'defegr', 44),
+(103, 'fevrgrg', 44),
+(104, 'sond', 45),
+(105, 'dage', 45),
+(106, 'cdcdvfv', 45);
 
 -- --------------------------------------------------------
 
@@ -121,12 +116,23 @@ CREATE TABLE IF NOT EXISTS `reponse_user` (
   `id_user` int DEFAULT NULL,
   `id_question` int DEFAULT NULL,
   `id_reponse` int DEFAULT NULL,
-  `statut_rep` enum('correct','incorrect') NOT NULL,
+  `score` int NOT NULL,
   PRIMARY KEY (`id_repuser`),
-  KEY `id_user` (`id_user`),
-  KEY `id_question` (`id_question`),
-  KEY `id_reponse` (`id_reponse`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `reponse_user_ibfk_1` (`id_user`),
+  KEY `reponse_user_ibfk_2` (`id_question`),
+  KEY `reponse_user_ibfk_3` (`id_reponse`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reponse_user`
+--
+
+INSERT INTO `reponse_user` (`id_repuser`, `id_user`, `id_question`, `id_reponse`, `score`) VALUES
+(6, 26, 45, 104, 0),
+(7, 26, 43, 98, 0),
+(8, 26, 44, 102, 1),
+(9, 26, 43, 98, 0),
+(10, 26, 44, 101, 1);
 
 -- --------------------------------------------------------
 
@@ -170,19 +176,20 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` tinyint NOT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_role` (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id_user`, `pseudo`, `email`, `password`, `statut_compte`, `id_role`, `api_key`, `status`) VALUES
-(23, 'admin', 'admin@exemple.com', '$2y$10$vqYvdjjLbGKz9l1BgipAfe2gHTFU0qOjnqFl/mb0CcRAGlAiZceSe', 1, 1, '', 1),
+(23, 'admin', 'admin@exemple.com', '$2y$10$vqYvdjjLbGKz9l1BgipAfe2gHTFU0qOjnqFl/mb0CcRAGlAiZceSe', 1, 1, '', 0),
 (24, 'validateur', 'validateur@exemple.com', '$2y$10$zrpa15MB.k0RdeB59J1b4.W0szgbwpuLfhLawc5PK1FeK5OK8oR2u', 1, 2, '', 0),
 (25, 'quizz_admin', 'quizzadmin@gmail.com', '$2y$10$z9ghxZVCJauFjo8s3EFAO.ThotXbrs3Ye7oqtPBCcajHX0aeQT/wi', 1, 3, '', 0),
-(26, 'quizzer', 'quizzer@example.com', '$2y$10$yWmRRkObDgRPBjIPt0ifmuEqcXstXJmVjqDLt9B7b/nObDYIlGDrG', 1, 4, '', 0),
+(26, 'quizzer', 'quizzer@example.com', '$2y$10$yWmRRkObDgRPBjIPt0ifmuEqcXstXJmVjqDLt9B7b/nObDYIlGDrG', 1, 4, 'g2pc72708lu9ng1kl', 1),
 (51, 'toto', 'toto@to.fr', '$2y$10$nLczIri2Vn0vcRFLBP5Mauq4nuMTlMOzcVuHISNpoxJHclXOUV9dW', 0, 5, 'g2pc71i8olu1b8fxw', 1),
-(52, 'stive', 'stive@gmail.com', '$2y$10$tlJzL2rKsEHQ6DcOyfwW1.zIzArM4wa0ooj/NTZO9my4UHWl0WjVK', 0, 5, 'g2pc71i8olu1bdj17', 1);
+(52, 'stive', 'stive@gmail.com', '$2y$10$tlJzL2rKsEHQ6DcOyfwW1.zIzArM4wa0ooj/NTZO9my4UHWl0WjVK', 0, 5, 'g2pc71i8olu1bdj17', 1),
+(57, 'quizzer2', 'quizzz@admin.com', '$2y$10$BZznhyj/b8xHIcHsdRUTpOMTYF5XQNp2yYaGI0OsVoXzYajjXaXBG', 0, 4, '', 0);
 
 --
 -- Constraints for dumped tables
@@ -205,6 +212,14 @@ ALTER TABLE `quizzes`
 --
 ALTER TABLE `reponses`
   ADD CONSTRAINT `reponses_ibfk_1` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE CASCADE ON UPDATE RESTRICT;
+
+--
+-- Constraints for table `reponse_user`
+--
+ALTER TABLE `reponse_user`
+  ADD CONSTRAINT `reponse_user_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `reponse_user_ibfk_2` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE CASCADE ON UPDATE RESTRICT,
+  ADD CONSTRAINT `reponse_user_ibfk_3` FOREIGN KEY (`id_reponse`) REFERENCES `reponses` (`id_reponse`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `users`

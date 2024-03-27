@@ -34,7 +34,7 @@ if (isset($_GET['id_quizz'])) {
 </head>
 <body>
 <h1>Quizz</h1>
-<form action="score.php"  method="post">
+<form action="score.php?id_quizz=<?php $id_quizz; ?>"  method="post">
 <?php
 
 if (isset($questions) && !empty($questions)) {

@@ -125,13 +125,13 @@ class Quizzer extends Users {
         $stmt->execute($params);
         return $stmt;
     }
-    public function insert_reponse_user($id_user, $id_question, $id_reponse, $statut_rep) {
-        $query="INSERT INTO Reponse_user (id_user, id_question, id_reponse, statut_rep) VALUES (:id_user, :id_question, :id_reponse, :statut_rep)";
+    public function insert_reponse_user($id_user, $id_question, $id_reponse, $score) {
+        $query="INSERT INTO Reponse_user (id_user, id_question, id_reponse, score) VALUES (:id_user, :id_question, :id_reponse, :score)";
         $params = [
             ':id_user' => (int) $id_user,
             ':id_question' => (int) $id_question,
             ':id_reponse' => (int) $id_reponse,
-            ':statut_rep' => htmlspecialchars($statut_rep)
+            ':score' => (int)$score
         ];
         $statement = $this->db->connection->prepare($query);
         $statement->execute($params);
