@@ -1,53 +1,49 @@
 <?php
-session_start();
-require 'classes.php';
-$db = new BDD();
-var_dump($_SESSION);
-$session_user_id = $_SESSION['user_id'];
-// Vérifie si l'utilisateur est connecté
-if(isset($session_user_id)) {
-    // Récupération de l'ID utilisateur de la session
-    
-    var_dump($session_user_id);
-   // Requête pour récupérer l'ID utilisateur de la base de données correspondant à celui de la session
-    $query = "SELECT id_user FROM Users WHERE id_user = :session_user_id";
-    $statement = $db->connection->prepare($query);
-    $statement->bindParam(':session_user_id', $session_user_id);
-    $statement->execute();
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-
-    // Comparaison des ID utilisateur de la session et de la base de données
-    if($user && $session_user_id == $user['id_user']) {
-        //vérifier si l'utilisateur a déjà une clé API
-        var_dump($user['id_user']);
-        // Renvoie une réponse JSON avec succès
-        echo json_encode(array("success" => true));
-    } else {
-        // L'utilisateur n'est pas connecté ou son ID ne correspond pas à celui de la session
-        // Renvoie une réponse JSON avec erreur
-        echo json_encode(array("error" => "L'utilisateur n'est pas connecté"));
-    }
-} else {
-    // Renvoie une réponse JSON avec erreur
-    echo json_encode(array("error" => "L'utilisateur n'est pas connecté"));
-}
-?>
+session_start()
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
-    
+    <title>Title</title>
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
-<body>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <button type="button" id="generateApiKey" name="generateApiKey" data-session-id="<?php echo $session_user_id; ?>">Récupérer mon API</button>
-    <!-- section pour rejoindre un quizz (coller un lien)  -->
-    <script src='../js/api.js'></script>
+<body data-barba="wrapper">
+    <?php include 'nav.php'; ?>
+    <div class="pages" data-barba="container" data-barba-namespace="home">
+        <div class="bigcard">
+            <div class="card2">
+                <h1><span>B</span><span>i</span><span>e</span><span>n</span><span>v</span><span>e</span><span>u</span><span>e</span>
+                </h1>
+                <p>Quizzeo est une plateforme interactive de quiz en ligne qui vous permet de créer, partager et
+                    participer à une grande variété de quiz sur divers sujets. Que vous soyez un étudiant cherchant à
+                    réviser pour un examen, un enseignant voulant rendre l'apprentissage plus ludique, ou simplement
+                    quelqu'un qui aime tester ses connaissances, Quizzeo a quelque chose pour vous !</p>
+                <br><br><br>
+                <h3>Redirection vers un Quiz pour y jouer</h3>
+                <form id="redirectForm">
+                    <label for="quizzeoLink">Lien de redirection :</label><br>
+                    <input type="url" id="quizzeoLink" name="quizzeoLink" placeholder="Entrez le lien de redirection"
+                        required><br><br>
+                    <button type="button" onclick="redirect()">Rediriger</button>
+                </form>
+                <script>
+                function redirect() {
+                    var url = document.getElementById('quizzeoLink').value;
+                    window.location.href = url;
+                }
+            </script>
+            </div>
+        </div>
+    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+        <script src="https://unpkg.com/@barba/core"></script>
+        <script src="../js/app.js"></script>
+        <script src="../js/script.js"></script>
 </body>
+
 </html>

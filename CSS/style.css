@@ -336,6 +336,64 @@ input[type="Submit"]:hover {
   background-color: #955f15;
 }
 
+.card2 {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  color: #f2f2f2;
+  background-color: #333;
+
+}
+.card2 button {
+  background-color: #b98c36;
+  color: #f2f2f2;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.card2 p {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.card2 h3 {
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.card2 form {
+  margin-top: 20px;
+}
+
+.card2 label {
+  font-size: 16px;
+}
+
+.card2 input[type="url"] {
+  width: 30%;
+  padding: 8px; /* Ajustez la taille du padding pour mieux s'adapter à la nouvelle taille du texte */
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 14px; /* Définissez la taille de la police pour réduire la taille du lien */
+}
+
+
+
+.card2 input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 40%;
+}
+
+
 @media only screen and (max-width: 457px) {
   .cover span {
     height: 50%;
