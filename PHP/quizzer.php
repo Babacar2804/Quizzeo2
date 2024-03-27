@@ -18,31 +18,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $quizz->deleteQuizLink($quiz_id);
         $quizz->updateQuizzStatus($quiz_id, 'termine');
         // Insérer les réponses de tous les utilisateurs dans la table reponse_users
-    $query = "SELECT ru.id_user, q.id_quizz, ru.id_question, ru.id_reponse 
+        $query = "SELECT ru.id_user, q.id_quizz, ru.id_question, ru.id_reponse 
     FROM reponse_user ru 
     INNER JOIN questions q ON ru.id_question = q.id_question 
     WHERE q.id_quizz = :id_quizz";
 
-$statement = $db->connection->prepare($query);
-$statement->execute(array(':id_quizz' => $quiz_id));
-$reponse_users = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $statement = $db->connection->prepare($query);
+        $statement->execute(array(':id_quizz' => $quiz_id));
+        $reponse_users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// foreach ($reponse_users as $reponse_user) {
+        // foreach ($reponse_users as $reponse_user) {
 // echo "Utilisateur ID : " . $reponse_user['id_user'] . " - Quiz ID : " . $reponse_user['id_quizz'] . " - Question ID : " . $reponse_user['id_question'] . " - Réponse ID : " . $reponse_user['id_reponse'] . "<br>";
 // }
 
-// Afficher les scores de tous les utilisateurs pour le quiz spécifique
-$query = "SELECT ru.id_user, u.pseudo, SUM(case when ru.score = 1 then 1 else 0 end) as score 
+        // Afficher les scores de tous les utilisateurs pour le quiz spécifique
+        $query = "SELECT ru.id_user, u.pseudo, SUM(case when ru.score = 1 then 1 else 0 end) as score 
 FROM reponse_user ru 
 INNER JOIN questions q ON ru.id_question = q.id_question 
 INNER JOIN users u ON ru.id_user = u.id_user 
 WHERE q.id_quizz = :id_quizz 
 GROUP BY ru.id_user";
 
-$statement = $db->connection->prepare($query);
-$statement->execute(array(':id_quizz' => $quiz_id));
-$scores = $statement->fetchAll(PDO::FETCH_ASSOC);
-  
+        $statement = $db->connection->prepare($query);
+        $statement->execute(array(':id_quizz' => $quiz_id));
+        $scores = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     }
 }
 
@@ -81,7 +81,6 @@ function generateUniqueLink($quiz_id)
                 <ul>
                     <?php foreach ($reqs as $req): ?>
                         <li>
-
                             <h3>
                                 <?= $req['titre'] ?>
                             </h3>
@@ -89,17 +88,24 @@ function generateUniqueLink($quiz_id)
                                 <?= $req['type'] ?>
                             </h5>
 
-                            <a href="editquizz.php?id_quizz=<?= $req['id_quizz'] ?>"><button>Modifier</button></a>
-                            <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                                <input type="hidden" name="quiz_id" value="<?= $req['id_quizz'] ?>">
-                                <button type="submit" name="lance">Lancer</button>
-                                <button type="submit" name="termine">Terminer</button>
-                                <?php if ($req['statut_quizz'] == 'lance'): ?>
-                                    <h5>Lien du quiz: <a href="<?= $req['lien'] ?>" target="_blank">
-                                            <?= $req['lien'] ?>
-                                        </a></h5>
+                            <?php if ($req['status'] == 1): ?>
+                                <a href="editquizz.php?id_quizz=<?= $req['id_quizz'] ?>"><button>Modifier</button></a>
+                                <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                    <input type="hidden" name="quiz_id" value="<?= $req['id_quizz'] ?>">
+                                    <?php if ($req['statut_quizz'] !== 'lance'): ?>
+                                        <button type="submit" name="lance">Lancer</button>
+                                    <?php endif; ?>
+                                    <button type="submit" name="termine">Terminer</button><br><br>
+                                <?php else: ?>
+                                    <br><h4>Quiz désactivé</h4>
                                 <?php endif; ?>
                             </form>
+
+                            <?php if ($req['statut_quizz'] == 'lance'): ?>
+                                <h5>Lien du quiz: <a href="<?= $req['lien'] ?>" target="_blank">
+                                        <?= $req['lien'] ?>
+                                    </a></h5>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                 </ul>
@@ -110,14 +116,17 @@ function generateUniqueLink($quiz_id)
             </div>
 
             <div class="card">
-            <!-- Liste des scores -->
-             <?php if (isset($scores) && !empty($scores)) : ?>
-             <?php foreach ($scores as $score) : ?>
-            <p>Utilisateur : <?= $score['pseudo'] ?> - Score : <?= $score['score'] ?></p>
-            <?php endforeach; ?>
-            <?php else : ?>
-            <p>Aucun score disponible.</p>
-            <?php endif; ?>
+                <!-- Liste des scores -->
+                <?php if (isset ($scores) && !empty ($scores)): ?>
+                    <?php foreach ($scores as $score): ?>
+                        <p>Utilisateur :
+                            <?= $score['pseudo'] ?> - Score :
+                            <?= $score['score'] ?>
+                        </p>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p>Aucun score disponible.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
