@@ -1,6 +1,11 @@
 <?php
-session_start()
-    ?>
+session_start();
+
+if (!isset ($_SESSION['user_id']) || !isset ($_SESSION['user_role']) || $_SESSION['user_role'] != 5) {
+    header("Location: 403.php");
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
