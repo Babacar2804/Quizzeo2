@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 27, 2024 at 02:27 PM
+-- Generation Time: Mar 28, 2024 at 08:58 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -34,16 +34,16 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `id_quizz` int NOT NULL,
   PRIMARY KEY (`id_question`),
   KEY `questions_ibfk_1` (`id_quizz`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `questions`
 --
 
 INSERT INTO `questions` (`id_question`, `question`, `id_quizz`) VALUES
-(43, 'ssd', 34),
-(44, 'frrefe', 34),
-(45, 'efef', 35);
+(46, 'comment je m&#039;appelle?', 36),
+(47, 'comment je m&#039;appelle?', 36),
+(48, 'comment je m&#039;appelle?', 36);
 
 -- --------------------------------------------------------
 
@@ -63,16 +63,14 @@ CREATE TABLE IF NOT EXISTS `quizzes` (
   `status` tinyint NOT NULL,
   PRIMARY KEY (`id_quizz`),
   KEY `id_user` (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `quizzes`
 --
 
 INSERT INTO `quizzes` (`id_quizz`, `titre`, `date_creation`, `type`, `statut_quizz`, `id_user`, `lien`, `status`) VALUES
-(31, 'Test', '2024-03-26', '', 'creation', 26, '', 0),
-(34, 'stive', '2024-03-27', 'QCM', 'termine', 26, '', 0),
-(35, 'zdf', '2024-03-27', 'Sondage', 'termine', 26, '', 0);
+(36, 'Test', '2024-03-27', '', 'termine', 26, '', 0);
 
 -- --------------------------------------------------------
 
@@ -87,22 +85,22 @@ CREATE TABLE IF NOT EXISTS `reponses` (
   `id_question` int NOT NULL,
   PRIMARY KEY (`id_reponse`),
   KEY `reponses_ibfk_1` (`id_question`)
-) ENGINE=InnoDB AUTO_INCREMENT=107 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `reponses`
 --
 
 INSERT INTO `reponses` (`id_reponse`, `reponses`, `id_question`) VALUES
-(98, 'szdef', 43),
-(99, 'dzefefe', 43),
-(100, 'defefef', 43),
-(101, 'efedves', 44),
-(102, 'defegr', 44),
-(103, 'fevrgrg', 44),
-(104, 'sond', 45),
-(105, 'dage', 45),
-(106, 'cdcdvfv', 45);
+(107, 'Babacar', 46),
+(108, 'Mansour', 46),
+(109, 'Gueye', 46),
+(110, 'Abdou', 47),
+(111, 'Aziz', 47),
+(112, 'Gueye', 47),
+(113, 'Jean', 48),
+(114, 'Louis', 48),
+(115, 'Correa', 48);
 
 -- --------------------------------------------------------
 
@@ -117,22 +115,21 @@ CREATE TABLE IF NOT EXISTS `reponse_user` (
   `id_question` int DEFAULT NULL,
   `id_reponse` int DEFAULT NULL,
   `score` int NOT NULL,
+  `is_correct` tinyint NOT NULL,
   PRIMARY KEY (`id_repuser`),
   KEY `reponse_user_ibfk_1` (`id_user`),
   KEY `reponse_user_ibfk_2` (`id_question`),
   KEY `reponse_user_ibfk_3` (`id_reponse`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `reponse_user`
 --
 
-INSERT INTO `reponse_user` (`id_repuser`, `id_user`, `id_question`, `id_reponse`, `score`) VALUES
-(6, 26, 45, 104, 0),
-(7, 26, 43, 98, 0),
-(8, 26, 44, 102, 1),
-(9, 26, 43, 98, 0),
-(10, 26, 44, 101, 1);
+INSERT INTO `reponse_user` (`id_repuser`, `id_user`, `id_question`, `id_reponse`, `score`, `is_correct`) VALUES
+(34, 26, 46, 107, 0, 1),
+(35, 26, 47, 112, 0, 1),
+(36, 26, 48, 114, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -176,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `status` tinyint NOT NULL,
   PRIMARY KEY (`id_user`),
   KEY `id_role` (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
@@ -186,10 +183,11 @@ INSERT INTO `users` (`id_user`, `pseudo`, `email`, `password`, `statut_compte`, 
 (23, 'admin', 'admin@exemple.com', '$2y$10$vqYvdjjLbGKz9l1BgipAfe2gHTFU0qOjnqFl/mb0CcRAGlAiZceSe', 1, 1, '', 0),
 (24, 'validateur', 'validateur@exemple.com', '$2y$10$zrpa15MB.k0RdeB59J1b4.W0szgbwpuLfhLawc5PK1FeK5OK8oR2u', 1, 2, '', 0),
 (25, 'quizz_admin', 'quizzadmin@gmail.com', '$2y$10$z9ghxZVCJauFjo8s3EFAO.ThotXbrs3Ye7oqtPBCcajHX0aeQT/wi', 1, 3, '', 0),
-(26, 'quizzer', 'quizzer@example.com', '$2y$10$yWmRRkObDgRPBjIPt0ifmuEqcXstXJmVjqDLt9B7b/nObDYIlGDrG', 1, 4, 'g2pc72708lu9ng1kl', 1),
+(26, 'quizzer', 'quizzer@example.com', '$2y$10$yWmRRkObDgRPBjIPt0ifmuEqcXstXJmVjqDLt9B7b/nObDYIlGDrG', 1, 4, 'g2pc72708lu9ng1kl', 0),
 (51, 'toto', 'toto@to.fr', '$2y$10$nLczIri2Vn0vcRFLBP5Mauq4nuMTlMOzcVuHISNpoxJHclXOUV9dW', 0, 5, 'g2pc71i8olu1b8fxw', 1),
 (52, 'stive', 'stive@gmail.com', '$2y$10$tlJzL2rKsEHQ6DcOyfwW1.zIzArM4wa0ooj/NTZO9my4UHWl0WjVK', 0, 5, 'g2pc71i8olu1bdj17', 1),
-(57, 'quizzer2', 'quizzz@admin.com', '$2y$10$BZznhyj/b8xHIcHsdRUTpOMTYF5XQNp2yYaGI0OsVoXzYajjXaXBG', 0, 4, '', 0);
+(57, 'quizzer2', 'quizzz@admin.com', '$2y$10$BZznhyj/b8xHIcHsdRUTpOMTYF5XQNp2yYaGI0OsVoXzYajjXaXBG', 0, 4, '', 0),
+(58, 'polo', 'polo@gmail.com', '$2y$10$pOOBOJTyv7lEYJ/dvH6QNepgKtn2O9d4gCSmOwKnfaoFOIGotc/5K', 1, 5, '', 1);
 
 --
 -- Constraints for dumped tables

@@ -27,9 +27,7 @@ $statement = $db->connection->prepare($query);
 $statement->execute(array(':id_quizz' => $quiz_id));
 $reponse_users = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-// foreach ($reponse_users as $reponse_user) {
-// echo "Utilisateur ID : " . $reponse_user['id_user'] . " - Quiz ID : " . $reponse_user['id_quizz'] . " - Question ID : " . $reponse_user['id_question'] . " - Réponse ID : " . $reponse_user['id_reponse'] . "<br>";
-// }
+
 
 // Afficher les scores de tous les utilisateurs pour le quiz spécifique
 $query = "SELECT ru.id_user, u.pseudo, SUM(case when ru.score = 1 then 1 else 0 end) as score 
