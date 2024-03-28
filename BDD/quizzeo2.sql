@@ -16,8 +16,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
---
+DROP Database if EXISTS quizzeo2;
+CREATE Database if not EXISTS quizzeo2;
+use  quizzeo2;
 -- Database: `quizzeo2`
 --
 
