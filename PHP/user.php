@@ -22,7 +22,7 @@ if (!isset ($_SESSION['user_id']) || !isset ($_SESSION['user_role']) || $_SESSIO
     <div class="pages" data-barba="container" data-barba-namespace="home">
         <div class="bigcard">
             <div class="card2">
-                <h1><span>B</span><span>i</span><span>e</span><span>n</span><span>v</span><span>e</span><span>u</span><span>e</span>
+                <h1><span>B</span><span>i</span><span>e</span><span>n</span><span>v</span><span>e</span><span>n</span><span>u</span><span>e</span>
                 </h1>
                 <p>Quizzeo est une plateforme interactive de quiz en ligne qui vous permet de créer, partager et
                     participer à une grande variété de quiz sur divers sujets. Que vous soyez un étudiant cherchant à
