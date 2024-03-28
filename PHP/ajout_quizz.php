@@ -14,12 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $titre = $_POST["titre"];
     $date_creation = date('Y-m-d');
     $type = $_POST["typeQuizz"];
-    
+    $status=1;
     // Récupération des questions et des réponses
     $questions = $_POST["questions"];
     
     // Utilisez la fonction d'insertion pour ajouter le quizz
-    $id_quizz = $quizzer->insert_quizz($id_user, $titre, $date_creation,  $type);
+    $id_quizz = $quizzer->insert_quizz($id_user, $titre, $date_creation, $type,$status);
 
     if ($id_quizz) {
 

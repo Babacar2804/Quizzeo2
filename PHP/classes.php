@@ -54,14 +54,15 @@ class Quizzer extends Users {
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
    
-    public function insert_quizz($id_user, $titre, $date_creation, $type) {
-        $query="INSERT INTO Quizzes (id_user,titre, date_creation,  type, statut_quizz) VALUES (:id_user,:titre, :date_creation, :type, :statut_quizz)";
+    public function insert_quizz($id_user, $titre, $date_creation, $type,$status) {
+        $query="INSERT INTO Quizzes (id_user,titre, date_creation,  type, statut_quizz,status) VALUES (:id_user,:titre, :date_creation, :type, :statut_quizz,:status)";
         $params = [
             ':titre' => htmlspecialchars($titre),
             ':date_creation' => htmlspecialchars($date_creation),
             ':type' => htmlspecialchars($type),
             ':id_user' => (int) $id_user,
-            ':statut_quizz'=>'creation'
+            ':statut_quizz'=>'creation',
+            ':status'=>(int)$status,
         ];
         $statement = $this->db->connection->prepare($query);
         $statement->execute($params);

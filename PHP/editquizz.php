@@ -66,7 +66,7 @@ if (isset ($_GET['id_quizz'])) {
 
                         <!-- Afficher les questions existantes -->
                         <?php foreach ($questions as $index => $question): ?>
-                            <div class="questionContainer">
+                            <div class="questionsContainer">
                                 <label for="question_<?php echo $index; ?>">Question :</label><br>
                                 <input type="text" id="question_<?php echo $index; ?>"
                                     name="questions[<?php echo $index; ?>][question]" required
@@ -90,9 +90,9 @@ if (isset ($_GET['id_quizz'])) {
                         <?php endforeach; ?>
 
                         <!-- Ajouter une nouvelle question -->
-                        <button type="button" onclick="showQCM()">Ajouter une question</button>
 
                         <input type="hidden" id="QuizzInput" name="typeQuizz" value="">
+                        <button type="button" onclick="showQCMedit()">Ajouter une question</button>
                         <br><br>
                         <input type="submit" name="submit" value="Modifier le Quizz">
 

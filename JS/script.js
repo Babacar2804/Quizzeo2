@@ -39,7 +39,12 @@ function showQCM() {
     const questionDiv = createQuestionDiv('qcm');
     document.getElementById('questionsContainer').appendChild(questionDiv);
 }
+function showQCMedit() {
+    document.getElementById('QuizzInput').value = 'qcm';
 
+    const questionDiv = createQuestionDiv('qcm');
+    document.getElementById('questionsContainer').appendChild(questionDiv);
+}
 function showSondage() {
     document.getElementById('QuizzInput').value = 'sondage';
     
@@ -54,6 +59,36 @@ function showSondage() {
     const questionDiv = createQuestionDiv('sondage');
     document.getElementById('questionsContainer').appendChild(questionDiv);
 }
+
+var slideIndex = 0;
+showSlides();
+
+function plusSlide(n) {
+    showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+    showSlides(slideIndex = n);
+}
+
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("cache");
+    
+    if (slideIndex >= slides.length) { slideIndex = 0; }    
+    if (slideIndex < 0) { slideIndex = slides.length - 1; }
+    
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    
+    slides[slideIndex].style.display = "block";  
+}
+
+// Au chargement de la page
+window.onload = function() {
+    showSlides();
+};
 
 
 let questionIndex=0;
